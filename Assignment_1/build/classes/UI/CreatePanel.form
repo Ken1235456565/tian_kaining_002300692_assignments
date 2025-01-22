@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
+                          <Component id="txtECNum" min="-2" pref="161" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
+                          <Component id="btnSave" min="-2" pref="161" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="txtName" alignment="1" min="-2" pref="161" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblAccom" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="lblNotes" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblECNum" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblEmail" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblTPNum" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblBRNum" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPFood" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblSLimit" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblInsur" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblWLimit" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPClimat" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblPActiv" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtPActiv" max="32767" attributes="0"/>
+                                  <Component id="txtAccom" pref="161" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="txtPClimat" min="-2" pref="161" max="-2" attributes="0"/>
+                                  <Component id="txtWLimit" min="-2" pref="161" max="-2" attributes="0"/>
+                                  <Component id="txtInsur" min="-2" pref="161" max="-2" attributes="0"/>
+                                  <Component id="txtSLimit" min="-2" pref="161" max="-2" attributes="0"/>
+                                  <Component id="txtPFood" min="-2" pref="161" max="-2" attributes="0"/>
+                                  <Component id="txtBRNum" min="-2" pref="161" max="-2" attributes="0"/>
+                                  <Component id="txtTPNum" min="-2" pref="161" max="-2" attributes="0"/>
+                                  <Component id="txtEmail" min="-2" pref="161" max="-2" attributes="0"/>
+                                  <Component id="txtNotes" min="-2" pref="161" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblMoTrans" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Component id="txtMoTrans" min="-2" pref="161" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblNumTrav" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Component id="txtNumTrav" min="-2" pref="161" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblBudget" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Component id="txtBudget" min="-2" pref="161" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblEnd" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Component id="txtEnd" min="-2" pref="161" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="lblDesti" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblStart" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblName" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblTitle" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="txtStart" min="-2" pref="161" max="-2" attributes="0"/>
+                                          <Component id="txtDesti" min="-2" pref="161" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace pref="37" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="btnSave" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblDesti" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtDesti" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="txtStart" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                                  <Component id="lblStart" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblBudget" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtBudget" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblNumTrav" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNumTrav" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="txtMoTrans" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblMoTrans" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="txtAccom" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblAccom" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="txtPActiv" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblECNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="txtECNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblNotes" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="txtNotes" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="txtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTPNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtTPNum" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="lblBRNum" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtBRNum" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="lblPFood" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtPFood" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblSLimit" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtSLimit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblInsur" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtInsur" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblWLimit" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtWLimit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPClimat" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtPClimat" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPActiv" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="64" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lblTitle">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Helvetica Neue" size="16" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Create Trip Profile"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPActiv">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSave">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Save"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Trip Name"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtName">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPActiv">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Preferred Activities"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDesti">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDesti">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Destination"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtStart">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblStart">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Start Date"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEnd">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEnd">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="End Date"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblBudget">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Budget"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtBudget">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNumTrav">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNumTrav">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Number of Travelers"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMoTrans">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Mode of Transportation"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtMoTrans">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtAccom">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblAccom">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Accommodation Type"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtECNum">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblECNum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Emergency Contact Number"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNotes">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Notes/Description"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNotes">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNotesActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEmail">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Traveler Email"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEmail">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblTPNum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Traveler Phone Number"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtTPNum">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblBRNum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Booking Reference Number"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtBRNum">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPFood">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Food Preference"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPFood">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSLimit">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Luggage Size Limit"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtSLimit">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblInsur">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Travel Insurance"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtInsur">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblWLimit">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Luggage Weight Limit"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtWLimit">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPClimat">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Climate Preference"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPClimat">
+    </Component>
+  </SubComponents>
+</Form>
