@@ -10,7 +10,7 @@ import model.OwnerDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
-import ui.LoginScreen;
+import ui.NavigationPage;
 
 /**
  *
@@ -122,8 +122,8 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         // 刷新登录界面
         Component[] components = mainWorkArea.getComponents();
         for(Component c : components){
-            if(c instanceof LoginScreen){
-                LoginScreen loginScreen = (LoginScreen)c;
+            if(c instanceof NavigationPage){
+                NavigationPage loginScreen = (NavigationPage)c;
                 loginScreen.populateRoleCombo();
                 loginScreen.populateSupplierCombo();
             }

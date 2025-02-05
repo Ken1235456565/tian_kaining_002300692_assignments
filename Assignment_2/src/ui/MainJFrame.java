@@ -15,21 +15,20 @@ import model.OwnerDirectory;
  */
 public class MainJFrame extends javax.swing.JFrame {
 
-    OwnerDirectory supplierDirectory;
+    private OwnerDirectory ownerDirectory;
     
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame() {
-        initComponents();
-        
-        supplierDirectory = new OwnerDirectory();
-        setSize(800,600);
+        initComponents(); // NetBeans 生成的 UI 代码
+
+        ownerDirectory = new OwnerDirectory(); // 初始化车主目录
+        setSize(800, 600);
         setResizable(false);
-     
-       
-        //initiate the login stream
-        setLoginScreen();
+
+        populateDemoData(); // 预填充测试数据
+        setNavigationPage(); // 加载导航界面
     }
 
     /**
@@ -96,13 +95,17 @@ public class MainJFrame extends javax.swing.JFrame {
         });
     }
 
-    private void setLoginScreen() {
-
-    LoginScreen ls = new LoginScreen(mainWorkArea, supplierDirectory);
-    mainWorkArea.add("LoginScreen", ls);
-    CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-    layout.next(mainWorkArea);
-
+    private void setNavigationPage() {
+        mainWorkArea.removeAll(); // 清空当前面板
+        mainWorkArea.revalidate();
+        mainWorkArea.repaint();
+        
+        NavigationPage ls = new NavigationPage(mainWorkArea, ownerDirectory);
+        ls.setEnabled(true); // 确保页面可编辑
+        mainWorkArea.add("NavigationPage", ls);
+        
+        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        layout.show(mainWorkArea, "NavigationPage"); // 确保正确切换
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -110,8 +113,15 @@ public class MainJFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void populateDemoData() {
-    Owner bestBuy = supplierDirectory.addSupplier();
-    bestBuy.setSupplyName("Best Buy");
+        Owner owner1 = new Owner();
+        owner1.setOwnerFirstName("John");
+        owner1.setOwnerLastName("Doe");
+        ownerDirectory.addOwner(owner1);
+
+        Owner owner2 = new Owner();
+        owner2.setOwnerFirstName("Alice");
+        owner2.setOwnerLastName("Smith");
+        ownerDirectory.addOwner(owner2);
     }
     
 }

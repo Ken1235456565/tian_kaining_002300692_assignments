@@ -31,6 +31,12 @@ public class OwnerDirectory {
         return newOwner;
     }
     
+    public void addOwner(Owner owner) {
+        if (owner != null) {
+            ownerList.add(owner);
+        }
+    }
+    
     // 删除指定的 Owner
     public void removeOwner(Owner owner) {
         ownerList.remove(owner);

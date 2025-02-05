@@ -6,36 +6,25 @@
 package ui;
 
 import java.awt.CardLayout;
-import javax.swing.JOptionPane;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import model.Owner;
-import model.OwnerDirectory;
-import ui.admin.AdminWorkAreaJPanel;
-import ui.supplier.SupplierWorkAreaJPanel;
+import model.OwnerDirectory;;
 
 /**
  *
  * @author archil
  */
-public class LoginScreen extends javax.swing.JPanel {
+public class NavigationPage extends javax.swing.JPanel {
 
-    JPanel mainWorkArea;
-    OwnerDirectory supplierDirectory;
-    Owner selectedSupplier = null;
-    
-    
-    /**
-     * Creates new form LoginScreen
-     */
-    public LoginScreen(JPanel mainWorkArea, OwnerDirectory supplierDirectory) {
-        initComponents();
-        
+    private JPanel mainWorkArea;
+    private OwnerDirectory ownerDirectory;
+
+    public NavigationPage(JPanel mainWorkArea, OwnerDirectory ownerDirectory) {
+        initComponents(); // 仅初始化 UI
         this.mainWorkArea = mainWorkArea;
-        this.supplierDirectory = supplierDirectory;
-        
-        populateRoleCombo();
-        populateSupplierCombo();
-        updateSupplierVisibility();
+        this.ownerDirectory = ownerDirectory;
     }
 
     /**
@@ -48,7 +37,7 @@ public class LoginScreen extends javax.swing.JPanel {
     private void initComponents() {
 
         lblTitle = new javax.swing.JLabel();
-        btnLogin = new javax.swing.JButton();
+        btnServices = new javax.swing.JButton();
         btnVehicle_Owner = new javax.swing.JButton();
         btnManageVehicles = new javax.swing.JButton();
 
@@ -57,10 +46,10 @@ public class LoginScreen extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblTitle.setText("Welcome to Vehicle Service Management Application");
 
-        btnLogin.setText("Services");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        btnServices.setText("Services");
+        btnServices.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+                btnServicesActionPerformed(evt);
             }
         });
 
@@ -91,7 +80,7 @@ public class LoginScreen extends javax.swing.JPanel {
                         .addGap(303, 303, 303)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnVehicle_Owner, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnServices, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnManageVehicles, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(196, Short.MAX_VALUE))
         );
@@ -101,7 +90,7 @@ public class LoginScreen extends javax.swing.JPanel {
                 .addGap(54, 54, 54)
                 .addComponent(lblTitle)
                 .addGap(57, 57, 57)
-                .addComponent(btnLogin)
+                .addComponent(btnServices)
                 .addGap(18, 18, 18)
                 .addComponent(btnVehicle_Owner)
                 .addGap(18, 18, 18)
@@ -110,65 +99,32 @@ public class LoginScreen extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
-        btnLogin.addActionListener(this::btnLoginActionPerformed);  
-         String selectedRole = (String) cmbRoles.getSelectedItem();
-        
-        if ("Administrator".equals(selectedRole)) {
-            AdminWorkAreaJPanel adminWork = new AdminWorkAreaJPanel(mainWorkArea, supplierDirectory);
-            mainWorkArea.add("AdminWorkArea", adminWork);
-            CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-            layout.next(mainWorkArea);
-        } else {
-            Owner supplier = (Owner) cmbSuppliers.getSelectedItem();
-            if (supplier != null) {
-                SupplierWorkAreaJPanel supplierWork = new SupplierWorkAreaJPanel(mainWorkArea, supplier);
-                mainWorkArea.add("SupplierWorkArea", supplierWork);
-                CardLayout layout = (CardLayout) mainWorkArea.getLayout();
-                layout.next(mainWorkArea);
-            } else {
-                JOptionPane.showMessageDialog(this, "Please select a supplier");
-            }
-        }
-    }//GEN-LAST:event_btnLoginActionPerformed
+    private void btnServicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicesActionPerformed
+        ManageServicesPanel panel = new ManageServicesPanel(mainWorkArea);
+        mainWorkArea.add("ManageServicesPanel", panel);
+        ((CardLayout) mainWorkArea.getLayout()).next(mainWorkArea);
+    }//GEN-LAST:event_btnServicesActionPerformed
 
     private void btnVehicle_OwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehicle_OwnerActionPerformed
         // TODO add your handling code here:
+        ManageOwnersPanel panel = new ManageOwnersPanel(mainWorkArea, ownerDirectory);
+        mainWorkArea.add("ManageOwnersPanel", panel);
+        ((CardLayout) mainWorkArea.getLayout()).next(mainWorkArea);
     }//GEN-LAST:event_btnVehicle_OwnerActionPerformed
 
     private void btnManageVehiclesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVehiclesActionPerformed
         // TODO add your handling code here:
+        ManageVehiclesPanel panel = new ManageVehiclesPanel(mainWorkArea);
+        mainWorkArea.add("ManageVehiclesPanel", panel);
+        ((CardLayout) mainWorkArea.getLayout()).next(mainWorkArea);
     }//GEN-LAST:event_btnManageVehiclesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnManageVehicles;
+    private javax.swing.JButton btnServices;
     private javax.swing.JButton btnVehicle_Owner;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
-    
-    public void populateRoleCombo() {
-        cmbRoles.removeAllItems();
-        cmbRoles.addItem("Administrator");
-        cmbRoles.addItem("Supplier");
-    }
 
-    public void populateSupplierCombo() {
-       cmbSuppliers.removeAllItems();
-        for (Owner supplier : supplierDirectory.getSupplierList()) {
-            cmbSuppliers.addItem(supplier);
-        }
-    }
-
-    private void updateSupplierVisibility() {
-         //To change body of generated methods, choose Tools | Templates.
-         String selectedRole = (String) cmbRoles.getSelectedItem();
-        boolean isSupplier = "Supplier".equals(selectedRole);
-        cmbSuppliers.setVisible(isSupplier);
-        if (isSupplier) {
-            populateSupplierCombo();
-        }
-    }
 }

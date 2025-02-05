@@ -31,7 +31,7 @@
                       <EmptySpace min="-2" pref="303" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnVehicle_Owner" min="-2" pref="181" max="-2" attributes="0"/>
-                          <Component id="btnLogin" min="-2" pref="181" max="-2" attributes="0"/>
+                          <Component id="btnServices" min="-2" pref="181" max="-2" attributes="0"/>
                           <Component id="btnManageVehicles" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -46,7 +46,7 @@
               <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
               <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-              <Component id="btnLogin" min="-2" max="-2" attributes="0"/>
+              <Component id="btnServices" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnVehicle_Owner" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -65,12 +65,12 @@
         <Property name="text" type="java.lang.String" value="Welcome to Vehicle Service Management Application"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnLogin">
+    <Component class="javax.swing.JButton" name="btnServices">
       <Properties>
         <Property name="text" type="java.lang.String" value="Services"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoginActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnServicesActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnVehicle_Owner">

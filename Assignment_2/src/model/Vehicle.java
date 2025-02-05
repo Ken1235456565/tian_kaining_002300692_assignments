@@ -13,56 +13,78 @@ import java.util.ArrayList;
  */
 public class Vehicle {
     
-    private String name;
-    private int price;
-    private int id;
-    private ArrayList<Service> features = new ArrayList<>();
+    private int vehicleID; // 车辆 ID
+    private String make; // 制造商（如 Toyota, Honda）
+    private String model; // 车型（如 Camry）
+    private int year; // 生产年份
+    private String registrationNumber; // 车牌号
+    private ArrayList<Service> servicesOpted; // 选择的服务
 
-    //this is a counter
-    private static int count = 0;
-    
+    // 车辆 ID 计数器，确保每辆车的 ID 是唯一的
+    private static int count = 1;
+
+    // 无参构造函数（自动分配 vehicleID）
     public Vehicle() {
-        count++;
-        id = count;
-        
+        this.vehicleID = count++;
+        this.servicesOpted = new ArrayList<>();
     }
 
-    public String getName() {
-        return name;
+    // 带参数的构造函数
+    public Vehicle(String make, String model, int year, String registrationNumber) {
+        this.vehicleID = count++;
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.registrationNumber = registrationNumber;
+        this.servicesOpted = new ArrayList<>();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    // Getters & Setters
+    public int getVehicleID() {
+        return vehicleID;
     }
 
-    public int getId() {
-        return id;
-    }
-    
-    
-    public int getPrice() {
-        return price;
+    public String getMake() {
+        return make;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setMake(String make) {
+        this.make = make;
     }
 
-    
-    @Override
-    public String toString() {
-        return name;
-    }
-    
-        public ArrayList<Service> getFeatures() {
-    return features;
+    public String getModel() {
+        return model;
     }
 
-    public void addFeature(Service feature) {
-        features.add(feature);
+    public void setModel(String model) {
+        this.model = model;
     }
 
-    public void removeFeature(Service feature) {
-        features.remove(feature);
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public void setRegistrationNumber(String registrationNumber) {
+        this.registrationNumber = registrationNumber;
+    }
+
+    public ArrayList<Service> getServicesOpted() {
+        return servicesOpted;
+    }
+
+    public void addService(Service service) {
+        this.servicesOpted.add(service);
+    }
+
+    public void removeService(Service service) {
+        this.servicesOpted.remove(service);
     }
 }

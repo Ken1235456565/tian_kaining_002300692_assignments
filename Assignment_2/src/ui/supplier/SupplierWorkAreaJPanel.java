@@ -10,7 +10,7 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
-import ui.LoginScreen;
+import ui.NavigationPage;
 
 
 /**
@@ -206,7 +206,7 @@ public class SupplierWorkAreaJPanel extends javax.swing.JPanel {
 
         Component[] componentArray = mainWorkArea.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        LoginScreen loginPanel = (LoginScreen) component;
+        NavigationPage loginPanel = (NavigationPage) component;
         loginPanel.populateSupplierCombo();
 
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();

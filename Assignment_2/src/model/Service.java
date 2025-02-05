@@ -83,11 +83,6 @@ public class Service {
         this.vehicle = vehicle;
     }
 
-    // 重写 toString()，便于 UI 显示
-    @Override
-    public String toString() {
-        return serviceType + " - $" + cost;
-    }
 }
 
 
