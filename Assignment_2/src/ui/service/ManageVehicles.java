@@ -9,7 +9,7 @@
  * Created on Oct 1, 2011, 11:09:26 AM
  */
 
-package ui.admin;
+package ui.service;
 
 import model.Owner;
 import model.OwnerDirectory;
@@ -24,13 +24,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Rushabh
  */
-public class ManageSuppliers extends javax.swing.JPanel {
+public class ManageVehicles extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private OwnerDirectory supplierDirectory;
     
     /** Creates new form ManageSuppliers */
-    public ManageSuppliers(JPanel upc, OwnerDirectory sd) {
+    public ManageVehicles(JPanel upc, OwnerDirectory sd) {
         initComponents();
         userProcessContainer = upc;
         supplierDirectory = sd;
@@ -155,7 +155,7 @@ public class ManageSuppliers extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         //int i=1;
-        AddSupplier as = new AddSupplier(userProcessContainer, supplierDirectory);
+        Services as = new Services(userProcessContainer, supplierDirectory);
         userProcessContainer.add("AddSupplier", as);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -170,7 +170,7 @@ public class ManageSuppliers extends javax.swing.JPanel {
         }
         
         Owner s = (Owner)tblSuppliers.getValueAt(row, 0);
-        ViewSupplier vs = new ViewSupplier(userProcessContainer, s);
+        ViewVehiclesDetails vs = new ViewVehiclesDetails(userProcessContainer, s);
         userProcessContainer.add("ViewSupplier", vs);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.admin;
+package ui.service;
 
 import model.Vehicle;
 import model.Owner;
@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Zerel
  */
-public class ViewSupplier extends javax.swing.JPanel {
+public class ViewVehiclesDetails extends javax.swing.JPanel {
 
     JPanel workArea;
     Owner supplier;
@@ -22,7 +22,7 @@ public class ViewSupplier extends javax.swing.JPanel {
     /**
      * Creates new form ViewSupplier
      */
-    public ViewSupplier(JPanel workArea, Owner supplier) {
+    public ViewVehiclesDetails(JPanel workArea, Owner supplier) {
         initComponents();
         this.workArea = workArea;
         this.supplier = supplier;

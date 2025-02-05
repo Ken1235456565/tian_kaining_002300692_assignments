@@ -9,7 +9,7 @@
  * Created on Oct 1, 2011, 11:55:16 AM
  */
 
-package ui.admin;
+package ui.service;
 
 import model.Owner;
 import model.OwnerDirectory;
@@ -33,14 +33,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author Rushabh
  */
-public class AddSupplier extends javax.swing.JPanel {
+public class Services extends javax.swing.JPanel {
 
     private JPanel workArea;
     private OwnerDirectory supplierDirectory;
     ImageIcon logoImage;
     
     /** Creates new form AddSupplier */
-    public AddSupplier(JPanel workArea, OwnerDirectory supplierDirectory) {
+    public Services(JPanel workArea, OwnerDirectory supplierDirectory) {
         initComponents();
         this.workArea = workArea;
         this.supplierDirectory = supplierDirectory;
@@ -232,7 +232,7 @@ public class AddSupplier extends javax.swing.JPanel {
                 btnRemove.setEnabled(true);
                 
             } catch (Exception ex) {
-                Logger.getLogger(AddSupplier.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Services.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this, 
                     "Error loading image", 
                     "Error", 
@@ -254,7 +254,7 @@ public class AddSupplier extends javax.swing.JPanel {
         workArea.remove(this);
         Component[] componentArray = workArea.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ManageSuppliers manageSuppliersJPanel = (ManageSuppliers) component;
+        ManageVehicles manageSuppliersJPanel = (ManageVehicles) component;
         manageSuppliersJPanel.refreshTable();
         CardLayout layout = (CardLayout) workArea.getLayout();
         layout.previous(workArea);
