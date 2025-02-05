@@ -5,9 +5,9 @@
  */
 package ui.supplier;
 
-import model.Product;
-import model.Supplier;
-import model.ProductCatalog;
+import model.Vehicle;
+import model.Owner;
+import model.VehicleCatalog;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,14 +20,14 @@ import javax.swing.table.DefaultTableModel;
 public class ManageProductCatalogJPanel extends javax.swing.JPanel {
 
     JPanel workArea;
-    Supplier supplier;
-    private javax.swing.JTextField txtName; 
-    private ProductCatalog productCatalog;
+    Owner supplier;
+    private javax.swing.JTextField txtName;
+    private VehicleCatalog productCatalog;
 
     /**
      * Creates new form ManageProductCatalogJPanel
      */
-    public ManageProductCatalogJPanel(JPanel workArea, Supplier supplier) {
+    public ManageProductCatalogJPanel(JPanel workArea, Owner supplier) {
         initComponents();
         this.workArea = workArea;
         this.supplier = supplier;
@@ -40,7 +40,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
         model.setRowCount(0);
 
-        for (Product p : supplier.getProductCatalog().getProductCatalog()) {
+        for (Vehicle p : supplier.getProductCatalog().getProductCatalog()) {
             Object row[] = new Object[3];
             row[0] = p;
             row[1] = p.getId();
@@ -166,7 +166,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
             return;
         }
 
-        Product product = (Product)tblProducts.getValueAt(selectedRow, 0);
+        Vehicle product = (Vehicle)tblProducts.getValueAt(selectedRow, 0);
         ViewProductDetailJPanel vpjp = new ViewProductDetailJPanel(workArea, product);
         workArea.add("ViewProductJPanel", vpjp);
         CardLayout layout = (CardLayout)workArea.getLayout();
@@ -189,11 +189,11 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
 
         try {
             int id = Integer.parseInt(input);
-            Product product = supplier.getProductCatalog().searchProduct(id);
+            Vehicle product = supplier.getProductCatalog().searchProduct(id);
 
             if(product != null) {
                 for(int i = 0; i < tblProducts.getRowCount(); i++) {
-                    Product rowProduct = (Product)tblProducts.getValueAt(i, 0);
+                    Vehicle rowProduct = (Vehicle)tblProducts.getValueAt(i, 0);
                     if(rowProduct.getId() == id) {
                         // Select the found product in table
                         tblProducts.setRowSelectionInterval(i, i);
@@ -224,7 +224,7 @@ public class ManageProductCatalogJPanel extends javax.swing.JPanel {
             return;
         }
 
-        Product product = (Product)tblProducts.getValueAt(selectedRow, 0);
+        Vehicle product = (Vehicle)tblProducts.getValueAt(selectedRow, 0);
         supplier.getProductCatalog().removeProduct(product);
         refreshTable();
     }//GEN-LAST:event_btnDeleteActionPerformed

@@ -11,8 +11,8 @@
 
 package ui.admin;
 
-import model.Supplier;
-import model.SupplierDirectory;
+import model.Owner;
+import model.OwnerDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Image;
@@ -36,11 +36,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class AddSupplier extends javax.swing.JPanel {
 
     private JPanel workArea;
-    private SupplierDirectory supplierDirectory;
+    private OwnerDirectory supplierDirectory;
     ImageIcon logoImage;
     
     /** Creates new form AddSupplier */
-    public AddSupplier(JPanel workArea, SupplierDirectory supplierDirectory) {
+    public AddSupplier(JPanel workArea, OwnerDirectory supplierDirectory) {
         initComponents();
         this.workArea = workArea;
         this.supplierDirectory = supplierDirectory;
@@ -192,7 +192,7 @@ public class AddSupplier extends javax.swing.JPanel {
             return;
         }
         
-        Supplier supplier = supplierDirectory.addSupplier();
+        Owner supplier = supplierDirectory.addSupplier();
         supplier.setSupplyName(name);
         supplier.setLogoImage(logoImage);
         

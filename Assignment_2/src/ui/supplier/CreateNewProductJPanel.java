@@ -5,8 +5,8 @@
  */
 package ui.supplier;
 
-import model.Product;
-import model.Supplier;
+import model.Vehicle;
+import model.Owner;
 import ui.admin.ManageSuppliers;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -19,20 +19,21 @@ import javax.swing.JPanel;
  */
 public class CreateNewProductJPanel extends javax.swing.JPanel {
 
-    Supplier supplier;
-    JPanel workArea;
-    Product product;
+    private Owner supplier;
+    private JPanel workArea;
+    private Vehicle product;
 
     /**
      * Creates new form CreateProductJPanel
      */
-    public CreateNewProductJPanel(JPanel workArea, Supplier supplier) {
+    public CreateNewProductJPanel(JPanel workArea, Owner supplier) {
         initComponents();
         this.supplier = supplier;
         this.workArea = workArea;
-        this.product = supplier.getProductCatalog().addProduct();
         
-        txtName.setText(String.valueOf(product.getId()));
+        txtId.setText("");
+        txtName.setText("");  // 名字框置空
+        txtPrice.setText("");
     }
 
     /**
@@ -140,15 +141,45 @@ public class CreateNewProductJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        product.setName(txtName.getText());
-        String stringPrice = txtPrice.getText();
-        if (stringPrice.isEmpty() == false) {
-            int price = Integer.parseInt(stringPrice);
-            product.setPrice(price);
+        String name = txtName.getText().trim();
+        String priceStr = txtPrice.getText().trim();
+        
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                "Please enter product name", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        JOptionPane.showMessageDialog(this, "Product successfully added", "Information", JOptionPane.INFORMATION_MESSAGE);
-        backAction();
+        try {
+            if (priceStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Please enter product price", 
+                    "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            int price = Integer.parseInt(priceStr);
+            
+            // 所有验证通过后，才创建产品
+            Vehicle product = supplier.getProductCatalog().addProduct();
+            product.setName(name);
+            product.setPrice(price);
+            
+            JOptionPane.showMessageDialog(this, 
+                "Product successfully added", 
+                "Information", 
+                JOptionPane.INFORMATION_MESSAGE);
+            backAction();
+            
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, 
+                "Please enter a valid price", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
 }//GEN-LAST:event_btnAddActionPerformed
+        
     private void backAction() {
         workArea.remove(this);
         Component[] componentArray = workArea.getComponents();

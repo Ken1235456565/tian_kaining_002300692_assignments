@@ -5,8 +5,8 @@
  */
 package ui.supplier;
 
-import model.Product;
-import model.Supplier;
+import model.Vehicle;
+import model.Owner;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -19,14 +19,17 @@ import javax.swing.JPanel;
 public class SearchForProductJPanel extends javax.swing.JPanel {
 
    JPanel workArea;
-   Supplier supplier;
+   Owner supplier;
+   private javax.swing.JLabel lblMessage;
     
     /** Creates new form CreateProductJPanel */
-    public SearchForProductJPanel(JPanel workArea, Supplier supplier) {
+    public SearchForProductJPanel(JPanel workArea, Owner supplier) {
       
         initComponents();
         this.workArea = workArea;
         this.supplier = supplier;
+        lblMessage = new javax.swing.JLabel();
+        lblMessage.setForeground(new java.awt.Color(255, 0, 0));
     }
 
     /** This method is called from within the constructor to
@@ -107,40 +110,26 @@ public class SearchForProductJPanel extends javax.swing.JPanel {
     
         // 检查输入是否为空
         if (productIdStr.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, 
-                "Please enter a product ID", 
-                "Warning", 
-                javax.swing.JOptionPane.WARNING_MESSAGE);
+            lblMessage.setText("Please enter a product ID");
             return;
         }
 
         try {
-            // 将输入转换为整数
             int productId = Integer.parseInt(productIdStr);
-
-            // 搜索产品
-            Product product = supplier.getProductCatalog().searchProduct(productId);
+            Vehicle product = supplier.getProductCatalog().searchProduct(productId);
 
             if (product != null) {
-                // 找到产品，显示产品详情
+                lblMessage.setText(""); // 清除错误消息
                 ViewProductDetailJPanel vpjp = new ViewProductDetailJPanel(workArea, product);
                 workArea.add("ViewProductDetailJPanel", vpjp);
                 CardLayout layout = (CardLayout) workArea.getLayout();
                 layout.next(workArea);
             } else {
-                // 没找到产品
-                javax.swing.JOptionPane.showMessageDialog(this, 
-                    "No product found with ID: " + productId, 
-                    "Information", 
-                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                lblMessage.setText("No product found with ID: " + productId);
             }
 
         } catch (NumberFormatException e) {
-            // 输入的不是有效数字
-            javax.swing.JOptionPane.showMessageDialog(this, 
-                "Please enter a valid number", 
-                "Error", 
-                javax.swing.JOptionPane.ERROR_MESSAGE);
+            lblMessage.setText("Please enter a valid number");
         }
 }//GEN-LAST:event_searchButtonActionPerformed
 

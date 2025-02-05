@@ -4,14 +4,15 @@
  */
 package ui.supplier;
 
-import model.Product;
-import model.Feature;
+import model.Vehicle;
+import model.Service;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import model.Feature;
+import javax.swing.event.TableModelEvent;
+import model.Service;
 
 /**
  *
@@ -20,12 +21,12 @@ import model.Feature;
 public class ViewProductDetailJPanel extends javax.swing.JPanel {
 
     JPanel workArea;
-    Product product;
+    Vehicle product;
 
     /**
      * Creates new form CreateProductJPanel
      */
-    public ViewProductDetailJPanel(JPanel workArea, Product product) {
+    public ViewProductDetailJPanel(JPanel workArea, Vehicle product) {
         initComponents();
         this.workArea = workArea;
         this.product = product;
@@ -33,6 +34,38 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
         txtName.setText(this.product.getName());
         txtId.setText(String.valueOf(this.product.getId()));
         txtPrice.setText(String.valueOf(this.product.getPrice()));
+        
+        // Add table cell edit listener
+        tblFeatures.getModel().addTableModelListener(e -> {
+            if (e.getType() == TableModelEvent.UPDATE && tblFeatures.isEnabled()) {
+                int row = e.getFirstRow();
+                int column = e.getColumn();
+                DefaultTableModel model = (DefaultTableModel) tblFeatures.getModel();
+                String name = (model.getValueAt(row, 0) != null) ? model.getValueAt(row, 0).toString().trim() : "";
+                Object value = (model.getValueAt(row, 1) != null) ? model.getValueAt(row, 1) : "N/A";
+
+                // 确保 name 不为空
+                if (!name.isEmpty()) {
+                    Service existingFeature = null;
+
+                    // 遍历当前 Product 的 features 查找是否已经存在
+                    for (Service f : product.getFeatures()) {
+                        if (f.getName().equals(name)) {
+                            existingFeature = f;
+                            break;
+                        }
+                    }
+
+                    if (existingFeature != null) {
+                        existingFeature.setValue(value); // 更新已有特性值
+                    } else {
+                        Service feature = new Service(product, name, value);
+                        product.addFeature(feature);
+                    }
+                }
+            }
+        });
+
 
         refreshTable();
     }
@@ -257,76 +290,70 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
 
     private void saveFeatures() {
        DefaultTableModel model = (DefaultTableModel) tblFeatures.getModel();
-        product.getFeatures().clear();  // 清除现有特性
-        // 保存表格中的所有特性
+
         for (int i = 0; i < model.getRowCount(); i++) {
-            String name = String.valueOf(model.getValueAt(i, 0));
+            String name = (model.getValueAt(i, 0) != null) ? model.getValueAt(i, 0).toString().trim() : "";
             Object value = model.getValueAt(i, 1);
-            if (name != null && !name.trim().isEmpty()) {
-                Feature feature = new Feature(product, name, value);
-                product.addFeature(feature);
+
+            if (!name.isEmpty()) {
+                Service existingFeature = null;
+
+                // 遍历当前 Product 的 features，看是否已有该特性
+                for (Service f : product.getFeatures()) {
+                    if (f.getName().equals(name)) {
+                        existingFeature = f;
+                        break;
+                    }
+                }
+
+                if (existingFeature != null) {
+                    existingFeature.setValue(value); // 更新已有特性值
+                } else {
+                    Service feature = new Service(product, name, value);
+                    product.addFeature(feature); // 直接添加，不清空原有的特性
+                }
             }
         }
     }
 
     private void btnAddFeatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddFeatureActionPerformed
         // TODO add your handling code here:
-        String name = JOptionPane.showInputDialog(this, 
-        "Enter feature name:", 
-        "Add Feature", 
-        JOptionPane.QUESTION_MESSAGE);
-        
-        if (name != null && !name.trim().isEmpty()) {
-            String value = JOptionPane.showInputDialog(this, 
-                "Enter feature value:", 
-                "Add Feature", 
-                JOptionPane.QUESTION_MESSAGE);
-
-            if (value != null) {
-                Feature feature = new Feature(product); // 创建新特性，设置owner
-                feature.setName(name);
-                feature.setValue(value);
-                product.addFeature(feature);  // 添加到产品的features列表中
-                refreshTable();  // 刷新表格显示
-            }
-        }
+        DefaultTableModel model = (DefaultTableModel) tblFeatures.getModel();
+        model.addRow(new Object[]{"", ""}); // 添加空行，用户可直接输入
     }//GEN-LAST:event_btnAddFeatureActionPerformed
 
     private void btnRemoveFeatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveFeatureActionPerformed
         // TODO add your handling code here:
         int selectedRow = tblFeatures.getSelectedRow();
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(this, 
-                "Please select a feature to remove", 
-                "Warning", 
-                JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please select a feature to remove", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // 获取选中的特性名称和值
         String featureName = (String) tblFeatures.getValueAt(selectedRow, 0);
         Object featureValue = tblFeatures.getValueAt(selectedRow, 1);
 
-        // 查找并删除匹配的特性
-        for (Feature feature : product.getFeatures()) {
+        Service featureToRemove = null;
+        for (Service feature : product.getFeatures()) {
             if (feature.getName().equals(featureName) && feature.getValue().equals(featureValue)) {
-                product.removeFeature(feature);
+                featureToRemove = feature;
                 break;
             }
         }
-        refreshTable();
+
+        if (featureToRemove != null) {
+            product.removeFeature(featureToRemove); // 从 Product 的 features 列表中删除
+        }
+
+        ((DefaultTableModel) tblFeatures.getModel()).removeRow(selectedRow); // 从表格中删除
     }//GEN-LAST:event_btnRemoveFeatureActionPerformed
 
     public void refreshTable() {
         DefaultTableModel model = (DefaultTableModel) tblFeatures.getModel();
         model.setRowCount(0);
 
-        // 显示产品的所有特性
-        for (Feature feature : product.getFeatures()) {
-            Object[] row = new Object[2];
-            row[0] = feature.getName();
-            row[1] = feature.getValue();
-            model.addRow(row);
+        for (Service feature : product.getFeatures()) {
+            model.addRow(new Object[]{feature.getName(), feature.getValue()});
         }
     }
 

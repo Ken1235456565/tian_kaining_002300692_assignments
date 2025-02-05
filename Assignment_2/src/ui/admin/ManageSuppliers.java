@@ -11,8 +11,8 @@
 
 package ui.admin;
 
-import model.Supplier;
-import model.SupplierDirectory;
+import model.Owner;
+import model.OwnerDirectory;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,10 +27,10 @@ import javax.swing.table.DefaultTableModel;
 public class ManageSuppliers extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-    private SupplierDirectory supplierDirectory;
+    private OwnerDirectory supplierDirectory;
     
     /** Creates new form ManageSuppliers */
-    public ManageSuppliers(JPanel upc, SupplierDirectory sd) {
+    public ManageSuppliers(JPanel upc, OwnerDirectory sd) {
         initComponents();
         userProcessContainer = upc;
         supplierDirectory = sd;
@@ -42,7 +42,7 @@ public class ManageSuppliers extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel)tblSuppliers.getModel();
         model.setRowCount(0);
         
-        for(Supplier s : supplierDirectory.getSupplierList()) {
+        for(Owner s : supplierDirectory.getSupplierList()) {
             Object row[] = new Object[1];
             row[0] = s;
            // row[1] = s.getProductCatalog().getProductCount() == 0 ? "None" : s.getProductCatalog().getProductCount();
@@ -169,7 +169,7 @@ public class ManageSuppliers extends javax.swing.JPanel {
             return;
         }
         
-        Supplier s = (Supplier)tblSuppliers.getValueAt(row, 0);
+        Owner s = (Owner)tblSuppliers.getValueAt(row, 0);
         ViewSupplier vs = new ViewSupplier(userProcessContainer, s);
         userProcessContainer.add("ViewSupplier", vs);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
@@ -184,7 +184,7 @@ public class ManageSuppliers extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        Supplier s = (Supplier)tblSuppliers.getValueAt(row, 0);
+        Owner s = (Owner)tblSuppliers.getValueAt(row, 0);
         supplierDirectory.removeSupplier(s);
         refreshTable();
     }//GEN-LAST:event_btnRemoveActionPerformed

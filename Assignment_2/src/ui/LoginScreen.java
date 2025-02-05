@@ -8,8 +8,8 @@ package ui;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import model.Supplier;
-import model.SupplierDirectory;
+import model.Owner;
+import model.OwnerDirectory;
 import ui.admin.AdminWorkAreaJPanel;
 import ui.supplier.SupplierWorkAreaJPanel;
 
@@ -20,14 +20,14 @@ import ui.supplier.SupplierWorkAreaJPanel;
 public class LoginScreen extends javax.swing.JPanel {
 
     JPanel mainWorkArea;
-    SupplierDirectory supplierDirectory;
-    Supplier selectedSupplier = null;
+    OwnerDirectory supplierDirectory;
+    Owner selectedSupplier = null;
     
     
     /**
      * Creates new form LoginScreen
      */
-    public LoginScreen(JPanel mainWorkArea, SupplierDirectory supplierDirectory) {
+    public LoginScreen(JPanel mainWorkArea, OwnerDirectory supplierDirectory) {
         initComponents();
         
         this.mainWorkArea = mainWorkArea;
@@ -48,91 +48,67 @@ public class LoginScreen extends javax.swing.JPanel {
     private void initComponents() {
 
         lblTitle = new javax.swing.JLabel();
-        cmbRoles = new javax.swing.JComboBox<>();
-        lblRole = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
-        cmbSuppliers = new javax.swing.JComboBox<>();
-        lblSupplier = new javax.swing.JLabel();
+        btnVehicle_Owner = new javax.swing.JButton();
+        btnManageVehicles = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblTitle.setText("Welcome to Lab 4 Demo");
+        lblTitle.setText("Welcome to Vehicle Service Management Application");
 
-        cmbRoles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbRolesActionPerformed(evt);
-            }
-        });
-
-        lblRole.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblRole.setText("Choose Role:");
-
-        btnLogin.setText("Login");
+        btnLogin.setText("Services");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
             }
         });
 
-        cmbSuppliers.addActionListener(new java.awt.event.ActionListener() {
+        btnVehicle_Owner.setText("Vehicle & Owner");
+        btnVehicle_Owner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbSuppliersActionPerformed(evt);
+                btnVehicle_OwnerActionPerformed(evt);
             }
         });
 
-        lblSupplier.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSupplier.setText("Select Supplier:");
+        btnManageVehicles.setText("Manage Vehicles");
+        btnManageVehicles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageVehiclesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(538, Short.MAX_VALUE)
-                .addComponent(lblTitle)
-                .addGap(64, 64, 64))
             .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSupplier, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblRole, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbSuppliers, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLogin)
-                    .addComponent(cmbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(187, 187, 187)
+                        .addComponent(lblTitle))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(303, 303, 303)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnVehicle_Owner, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnManageVehicles, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblRole, lblSupplier});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(54, 54, 54)
                 .addComponent(lblTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbRoles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblRole))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbSuppliers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSupplier))
-                .addGap(23, 23, 23)
+                .addGap(57, 57, 57)
                 .addComponent(btnLogin)
-                .addGap(281, 281, 281))
+                .addGap(18, 18, 18)
+                .addComponent(btnVehicle_Owner)
+                .addGap(18, 18, 18)
+                .addComponent(btnManageVehicles)
+                .addContainerGap(345, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cmbSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSuppliersActionPerformed
-        // TODO add your handling code here:
-        Supplier selectedSupplier = (Supplier) cmbSuppliers.getSelectedItem();
-        if (selectedSupplier != null) {
-            JOptionPane.showMessageDialog(this, "Selected Supplier: " + selectedSupplier.getSupplyName());
-        }
-    }//GEN-LAST:event_cmbSuppliersActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
@@ -145,7 +121,7 @@ public class LoginScreen extends javax.swing.JPanel {
             CardLayout layout = (CardLayout) mainWorkArea.getLayout();
             layout.next(mainWorkArea);
         } else {
-            Supplier supplier = (Supplier) cmbSuppliers.getSelectedItem();
+            Owner supplier = (Owner) cmbSuppliers.getSelectedItem();
             if (supplier != null) {
                 SupplierWorkAreaJPanel supplierWork = new SupplierWorkAreaJPanel(mainWorkArea, supplier);
                 mainWorkArea.add("SupplierWorkArea", supplierWork);
@@ -157,18 +133,19 @@ public class LoginScreen extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void cmbRolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRolesActionPerformed
+    private void btnVehicle_OwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehicle_OwnerActionPerformed
         // TODO add your handling code here:
-        updateSupplierVisibility();
-    }//GEN-LAST:event_cmbRolesActionPerformed
+    }//GEN-LAST:event_btnVehicle_OwnerActionPerformed
+
+    private void btnManageVehiclesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVehiclesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnManageVehiclesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
-    private javax.swing.JComboBox<Object> cmbRoles;
-    private javax.swing.JComboBox<Supplier> cmbSuppliers;
-    private javax.swing.JLabel lblRole;
-    private javax.swing.JLabel lblSupplier;
+    private javax.swing.JButton btnManageVehicles;
+    private javax.swing.JButton btnVehicle_Owner;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
     
@@ -180,7 +157,7 @@ public class LoginScreen extends javax.swing.JPanel {
 
     public void populateSupplierCombo() {
        cmbSuppliers.removeAllItems();
-        for (Supplier supplier : supplierDirectory.getSupplierList()) {
+        for (Owner supplier : supplierDirectory.getSupplierList()) {
             cmbSuppliers.addItem(supplier);
         }
     }

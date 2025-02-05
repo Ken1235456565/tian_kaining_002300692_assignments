@@ -6,8 +6,8 @@
 package ui;
 
 import java.awt.CardLayout;
-import model.Supplier;
-import model.SupplierDirectory;
+import model.Owner;
+import model.OwnerDirectory;
 
 /**
  *
@@ -15,7 +15,7 @@ import model.SupplierDirectory;
  */
 public class MainJFrame extends javax.swing.JFrame {
 
-    SupplierDirectory supplierDirectory;
+    OwnerDirectory supplierDirectory;
     
     /**
      * Creates new form MainJFrame
@@ -23,7 +23,7 @@ public class MainJFrame extends javax.swing.JFrame {
     public MainJFrame() {
         initComponents();
         
-        supplierDirectory = new SupplierDirectory();
+        supplierDirectory = new OwnerDirectory();
         setSize(800,600);
         setResizable(false);
      
@@ -110,7 +110,7 @@ public class MainJFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void populateDemoData() {
-    Supplier bestBuy = supplierDirectory.addSupplier();
+    Owner bestBuy = supplierDirectory.addSupplier();
     bestBuy.setSupplyName("Best Buy");
     }
     

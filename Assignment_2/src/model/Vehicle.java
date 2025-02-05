@@ -11,17 +11,17 @@ import java.util.ArrayList;
  *
  * @author Rushabh
  */
-public class Product {
+public class Vehicle {
     
     private String name;
     private int price;
     private int id;
-    private ArrayList<Feature> features = new ArrayList<>();
+    private ArrayList<Service> features = new ArrayList<>();
 
     //this is a counter
     private static int count = 0;
     
-    public Product() {
+    public Vehicle() {
         count++;
         id = count;
         
@@ -54,15 +54,15 @@ public class Product {
         return name;
     }
     
-        public ArrayList<Feature> getFeatures() {
+        public ArrayList<Service> getFeatures() {
     return features;
     }
 
-    public void addFeature(Feature feature) {
+    public void addFeature(Service feature) {
         features.add(feature);
     }
 
-    public void removeFeature(Feature feature) {
+    public void removeFeature(Service feature) {
         features.remove(feature);
     }
 }

@@ -4,8 +4,8 @@
  */
 package ui.admin;
 
-import model.Product;
-import model.Supplier;
+import model.Vehicle;
+import model.Owner;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -17,12 +17,12 @@ import javax.swing.table.DefaultTableModel;
 public class ViewSupplier extends javax.swing.JPanel {
 
     JPanel workArea;
-    Supplier supplier;
+    Owner supplier;
     
     /**
      * Creates new form ViewSupplier
      */
-    public ViewSupplier(JPanel workArea, Supplier supplier) {
+    public ViewSupplier(JPanel workArea, Owner supplier) {
         initComponents();
         this.workArea = workArea;
         this.supplier = supplier;
@@ -38,7 +38,7 @@ public class ViewSupplier extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel)productCatalog.getModel();
         model.setRowCount(0);
         
-        for(Product p : supplier.getProductCatalog().getProductCatalog()) {
+        for(Vehicle p : supplier.getProductCatalog().getProductCatalog()) {
             Object row[] = new Object[3];
             row[0] = p;
             row[1] = p.getId();
