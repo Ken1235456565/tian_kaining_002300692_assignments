@@ -14,9 +14,13 @@ package ui.service;
 import model.Owner;
 import model.OwnerDirectory;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import model.Service;
+import model.Vehicle;
+import model.VehicleCatalog;
 
 
 
@@ -63,9 +67,9 @@ public class ManageVehicles extends javax.swing.JPanel {
         srlVehicles = new javax.swing.JScrollPane();
         tblVehicles = new javax.swing.JTable();
         btnRemove = new javax.swing.JButton();
-        btnView = new javax.swing.JButton();
-        btnAdd = new javax.swing.JButton();
-        lblVehicleList = new javax.swing.JLabel();
+        btnsearch = new javax.swing.JButton();
+        btnviewdetail = new javax.swing.JButton();
+        lblVehicleMang = new javax.swing.JLabel();
         TextSearchField = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
 
@@ -93,21 +97,21 @@ public class ManageVehicles extends javax.swing.JPanel {
             }
         });
 
-        btnView.setText("Search");
-        btnView.addActionListener(new java.awt.event.ActionListener() {
+        btnsearch.setText("Search");
+        btnsearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewActionPerformed(evt);
+                btnsearchActionPerformed(evt);
             }
         });
 
-        btnAdd.setText("View Details");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        btnviewdetail.setText("View Details");
+        btnviewdetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                btnviewdetailActionPerformed(evt);
             }
         });
 
-        lblVehicleList.setText("Manage Vehicles:");
+        lblVehicleMang.setText("Manage Vehicles:");
 
         TextSearchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,18 +137,18 @@ public class ManageVehicles extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(srlVehicles, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnAdd)
+                            .addComponent(btnviewdetail)
                             .addGap(32, 32, 32)
                             .addComponent(btnRemove))
-                        .addComponent(lblVehicleList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblVehicleMang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(TextSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnView))))
+                            .addComponent(btnsearch))))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAdd, btnRemove, btnView});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnRemove, btnsearch, btnviewdetail});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,45 +156,79 @@ public class ManageVehicles extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addComponent(btnBack)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblVehicleList, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblVehicleMang, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnView))
+                    .addComponent(btnsearch))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(srlVehicles, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
+                    .addComponent(btnviewdetail)
                     .addComponent(btnRemove))
                 .addContainerGap(220, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-        
-        //int i=1;
-        Services as = new Services(userProcessContainer, ownerDirectory);
-        userProcessContainer.add("AddSupplier", as);
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnAddActionPerformed
-
-    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+    private void btnviewdetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnviewdetailActionPerformed
         // TODO add your handling code here:
         int row = tblVehicles.getSelectedRow();
-        if(row<0) {
-            JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+        if(row < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a vehicle from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
-        Owner s = (Owner)tblVehicles.getValueAt(row, 0);
-        ViewVehiclesDetails vs = new ViewVehiclesDetails(userProcessContainer, s);
-        userProcessContainer.add("ViewSupplier", vs);
+
+        Owner owner = (Owner)tblVehicles.getValueAt(row, 0);
+        ViewVehiclesDetails vd = new ViewVehiclesDetails(userProcessContainer, owner);
+        userProcessContainer.add("ViewVehicleDetails", vd);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnViewActionPerformed
+    }//GEN-LAST:event_btnviewdetailActionPerformed
+
+    private void btnsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsearchActionPerformed
+        // TODO add your handling code here:
+        String searchInput = TextSearchField.getText().trim();
+    DefaultTableModel model = (DefaultTableModel) tblVehicles.getModel();
+    model.setRowCount(0);  // 清空表格
+    
+    if (!searchInput.isEmpty()) {
+        boolean found = false;
+        
+        for (Owner owner : ownerDirectory.getOwnerList()) {
+            VehicleCatalog catalog = owner.getVehicleCatalog();
+            ArrayList<Vehicle> results = catalog.searchVehicles(searchInput);
+            
+            if (!results.isEmpty()) {
+                found = true;
+                for (Vehicle vehicle : results) {
+                    Object[] row = new Object[4];
+                    row[0] = owner.getOwnerID();
+                    row[1] = vehicle.getVehicleID();
+                    if (!vehicle.getServicesOpted().isEmpty()) {
+                        Service service = vehicle.getServicesOpted().get(0);
+                        row[2] = service.getServiceType();
+                        row[3] = service.getCost();
+                    } else {
+                        row[2] = "No Service";
+                        row[3] = 0.0;
+                    }
+                    model.addRow(row);
+                }
+            }
+        }
+        
+        if (!found) {
+            JOptionPane.showMessageDialog(this, 
+                "No matching records found.", 
+                "Search Result", 
+                JOptionPane.INFORMATION_MESSAGE);
+            refreshTable();
+        }
+    } else {
+        refreshTable();
+    }
+    }//GEN-LAST:event_btnsearchActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         // TODO add your handling code here:
@@ -228,11 +266,11 @@ public class ManageVehicles extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TextSearchField;
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRemove;
-    private javax.swing.JButton btnView;
-    private javax.swing.JLabel lblVehicleList;
+    private javax.swing.JButton btnsearch;
+    private javax.swing.JButton btnviewdetail;
+    private javax.swing.JLabel lblVehicleMang;
     private javax.swing.JScrollPane srlVehicles;
     private javax.swing.JTable tblVehicles;
     // End of variables declaration//GEN-END:variables

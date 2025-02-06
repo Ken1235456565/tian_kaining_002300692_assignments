@@ -23,6 +23,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private Service service;
     private VehicleCatalog vehicleCatalog;
     private ServiceCatalog serviceCatalog;
+    private String selectedService = "";
     
     /**
      * Creates new form MainJFrame
@@ -128,6 +129,15 @@ public class MainJFrame extends javax.swing.JFrame {
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.show(mainWorkArea, "NavigationPage"); // 确保正确切换
     }
+    
+    // ✅ 提供 Getter 和 Setter 供其他面板访问
+    public void setSelectedService(String service) {
+        this.selectedService = service;
+    }
+
+    public String getSelectedService() {
+        return selectedService;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel mainWorkArea;
@@ -171,7 +181,7 @@ public class MainJFrame extends javax.swing.JFrame {
     // 创建 Service（服务）
     Service service1 = new Service(101, "Oil Change", 50.0, "Mike", 30);
     Service service2 = new Service(102, "Car Wash", 20.0, "Sara", 15);
-    Service service3 = new Service(103, "Tire Replacement", 80.0, "Tom", 60);
+    Service service3 = new Service(103, "Puncture", 80.0, "Tom", 60);
 
     // 添加 Service 到 ServiceCatalog
     serviceCatalog.addService(service1);

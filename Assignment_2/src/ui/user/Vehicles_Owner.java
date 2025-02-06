@@ -14,20 +14,10 @@ package ui.user;
 import model.Owner;
 import model.OwnerDirectory;
 import java.awt.CardLayout;
-import java.awt.Component;
-import java.awt.Image;
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import ui.service.ManageVehicles;
+import javax.swing.SwingUtilities;
+import ui.MainJFrame;
 
 
 /**
@@ -304,17 +294,41 @@ public class Vehicles_Owner extends javax.swing.JPanel {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-       backAction();
+        MainJFrame mainFrame = (MainJFrame) SwingUtilities.getWindowAncestor(this);
+        String selectedService = mainFrame.getSelectedService(); //获取存储的服务
+        if (!selectedService.isEmpty()) {
+        System.out.println("User selected service: " + selectedService); //确保数据已存储
+        } else {
+            System.out.println("No service selected.");
+        }
+        backAction();
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void sevicComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sevicComboActionPerformed
-        // TODO add your handling code here:
-        
+        //TODO add your handling code here:
+        //获取MainJFrame实例
+        MainJFrame mainFrame = (MainJFrame) SwingUtilities.getWindowAncestor(this);
+
+        //存储用户选择的服务
+        String selectedService = (String) sevicCombo.getSelectedItem();
+        mainFrame.setSelectedService(selectedService);
+
+        System.out.println(mainFrame.getSelectedService());
     }//GEN-LAST:event_sevicComboActionPerformed
 
     private void sevicComboComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_sevicComboComponentShown
         // TODO add your handling code here:
-        
+        // ✅ 获取 `MainJFrame` 实例
+        MainJFrame mainFrame = (MainJFrame) SwingUtilities.getWindowAncestor(this);
+
+        // ✅ 获取之前存储的 selectedService
+        String storedService = mainFrame.getSelectedService();
+
+        // ✅ 如果之前有选择的服务，就在 JComboBox 里自动选中它
+        if (storedService != null && !storedService.isEmpty()) {
+            sevicCombo.setSelectedItem(storedService);
+            System.out.println(storedService);
+    }
     }//GEN-LAST:event_sevicComboComponentShown
 
     private void txtOIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOIDActionPerformed
@@ -358,14 +372,9 @@ public class Vehicles_Owner extends javax.swing.JPanel {
     }//GEN-LAST:event_txtReNumActionPerformed
 
       
-      private void backAction() {
-        workArea.remove(this);
-        Component[] componentArray = workArea.getComponents();
-        Component component = componentArray[componentArray.length - 1];
-        ManageVehicles manageSuppliersJPanel = (ManageVehicles) component;
-        manageSuppliersJPanel.refreshTable();
+    private void backAction() {
         CardLayout layout = (CardLayout) workArea.getLayout();
-        layout.previous(workArea);
+        layout.show(workArea, "NavigationPage"); //直接切换到 NavigationPage
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -392,5 +401,6 @@ public class Vehicles_Owner extends javax.swing.JPanel {
     private javax.swing.JTextField txtVehiID;
     private javax.swing.JTextField txtservDate;
     // End of variables declaration//GEN-END:variables
+
 
 }

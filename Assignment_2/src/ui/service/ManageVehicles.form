@@ -28,15 +28,15 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="srlVehicles" min="-2" pref="708" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="btnAdd" linkSize="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnviewdetail" linkSize="1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="btnRemove" linkSize="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="lblVehicleList" alignment="1" max="32767" attributes="0"/>
+                      <Component id="lblVehicleMang" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="TextSearchField" min="-2" pref="434" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnView" linkSize="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnsearch" linkSize="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -50,17 +50,17 @@
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Component id="btnBack" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblVehicleList" min="-2" pref="17" max="-2" attributes="0"/>
+              <Component id="lblVehicleMang" min="-2" pref="17" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="TextSearchField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnView" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnsearch" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="srlVehicles" min="-2" pref="188" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnviewdetail" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnRemove" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="220" max="32767" attributes="0"/>
@@ -112,23 +112,23 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoveActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnView">
+    <Component class="javax.swing.JButton" name="btnsearch">
       <Properties>
         <Property name="text" type="java.lang.String" value="Search"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnViewActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnsearchActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAdd">
+    <Component class="javax.swing.JButton" name="btnviewdetail">
       <Properties>
         <Property name="text" type="java.lang.String" value="View Details"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnviewdetailActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblVehicleList">
+    <Component class="javax.swing.JLabel" name="lblVehicleMang">
       <Properties>
         <Property name="text" type="java.lang.String" value="Manage Vehicles:"/>
       </Properties>

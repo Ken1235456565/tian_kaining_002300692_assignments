@@ -9,10 +9,13 @@ import java.awt.CardLayout;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.Owner;
 import model.OwnerDirectory;
 import ui.service.Services;
 import ui.service.ManageVehicles;
+import ui.service.ViewVehiclesDetails;
 import ui.user.Vehicles_Owner;
 ;
 
