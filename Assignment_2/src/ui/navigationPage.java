@@ -27,7 +27,7 @@ public class NavigationPage extends javax.swing.JPanel {
     private ServiceCatalog serviceCatalog;
    
 
-    public NavigationPage(JPanel mainWorkArea, OwnerDirectory ownerDirectory) {
+    public NavigationPage(JPanel mainWorkArea, OwnerDirectory ownerDirectory, ServiceCatalog serviceCatalog) {
         initComponents(); // 仅初始化 UI
         this.mainWorkArea = mainWorkArea;
         this.ownerDirectory = ownerDirectory;
@@ -115,7 +115,7 @@ public class NavigationPage extends javax.swing.JPanel {
 
     private void btnVehicle_OwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehicle_OwnerActionPerformed
         // TODO add your handling code here:
-        Vehicles_Owner panel = new Vehicles_Owner(mainWorkArea, ownerDirectory);
+        Vehicles_Owner panel = new Vehicles_Owner(mainWorkArea, ownerDirectory, serviceCatalog);
         mainWorkArea.add(panel, "VehiclesOwner");
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.show(mainWorkArea, "VehiclesOwner");

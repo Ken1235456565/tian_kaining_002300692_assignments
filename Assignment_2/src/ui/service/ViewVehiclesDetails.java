@@ -24,13 +24,17 @@ public class ViewVehiclesDetails extends javax.swing.JPanel {
     /**
      * Creates new form ViewSupplier
      */
-    public ViewVehiclesDetails(JPanel workArea, Owner supplier) {
+    public ViewVehiclesDetails(JPanel workArea, Owner owner) {
         initComponents();
         this.workArea = workArea;
         this.owner = owner;
         this.vehicles = vehicles;
-   
         
+        // 确保获取正确的 vehicle 对象
+        if(owner != null && !owner.getVehicleCatalog().getVehicleCatalog().isEmpty()) {
+            this.vehicles = owner.getVehicleCatalog().getVehicleCatalog().get(0);
+        }
+   
         populateFields();
         
     }

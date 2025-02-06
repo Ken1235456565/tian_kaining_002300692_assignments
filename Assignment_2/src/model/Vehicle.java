@@ -6,6 +6,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -31,7 +32,7 @@ public class Vehicle {
     }
 
     // 带参数的构造函数
-    public Vehicle(String make, String model, int year, String registrationNumber) {
+    public Vehicle(String vehicleID, String make, String model, int year, String registrationNumber, Owner owner) {
         this.vehicleID = vehicleID;
         this.make = make;
         this.model = model;
@@ -96,4 +97,23 @@ public class Vehicle {
     public void removeService(Service service) {
         this.servicesOpted.remove(service);
     }
+    
+    
+    public String toString() {
+    if (servicesOpted.isEmpty()) {
+        return "Vehicle: " + make + " " + model + " (" + year + ") - No services opted.";
+    }
+
+    StringBuilder result = new StringBuilder();
+    result.append("Vehicle: ").append(make).append(" ").append(model).append(" (").append(year).append(") - Services: ");
+
+    for (int i = 0; i < servicesOpted.size(); i++) {
+        result.append(servicesOpted.get(i).getServiceName()); //只显示服务名称
+        if (i < servicesOpted.size() - 1) {
+            result.append(", "); // 添加逗号分隔，最后一个不加
+        }
+    }
+    return result.toString();
+}
+    
 }

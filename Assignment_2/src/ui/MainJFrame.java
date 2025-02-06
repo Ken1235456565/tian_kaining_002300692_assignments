@@ -46,7 +46,7 @@ public class MainJFrame extends javax.swing.JFrame {
         setNavigationPage(); // 设置导航页面
         
         //直接跳转到 NavigationPage
-        NavigationPage navigationPage = new NavigationPage(mainWorkArea, ownerDirectory);
+        NavigationPage navigationPage = new NavigationPage(mainWorkArea, ownerDirectory, serviceCatalog);
         mainWorkArea.add("NavigationPage", navigationPage);
 
         setContentPane(mainWorkArea); //让 `mainWorkArea` 成为默认面板
@@ -122,9 +122,9 @@ public class MainJFrame extends javax.swing.JFrame {
         mainWorkArea.revalidate();
         mainWorkArea.repaint();
         
-        NavigationPage ls = new NavigationPage(mainWorkArea, ownerDirectory);
-        ls.setEnabled(true); // 确保页面可编辑
-        mainWorkArea.add("NavigationPage", ls);
+        NavigationPage navigationPage = new NavigationPage(mainWorkArea, ownerDirectory, serviceCatalog);
+        navigationPage.setEnabled(true); // 确保页面可编辑
+        mainWorkArea.add("NavigationPage", navigationPage);
         
         CardLayout layout = (CardLayout) mainWorkArea.getLayout();
         layout.show(mainWorkArea, "NavigationPage"); // 确保正确切换
@@ -146,30 +146,11 @@ public class MainJFrame extends javax.swing.JFrame {
     private void populateDemoData() {
 
     // 创建 Owner（车主）
-    Owner owner1 = new Owner();
-    owner1.setOwnerID(1);
-    owner1.setOwnerFirstName("John");
-    owner1.setOwnerLastName("Doe");
-
-    Owner owner2 = new Owner();
-    owner2.setOwnerID(2);
-    owner2.setOwnerFirstName("Alice");
-    owner2.setOwnerLastName("Smith");
-
-    Owner owner3 = new Owner();
-    owner3.setOwnerID(3);
-    owner3.setOwnerFirstName("Michael");
-    owner3.setOwnerLastName("Johnson");
-
-    Owner owner4 = new Owner();
-    owner4.setOwnerID(4);
-    owner4.setOwnerFirstName("Emily");
-    owner4.setOwnerLastName("Davis");
-
-    Owner owner5 = new Owner();
-    owner5.setOwnerID(5);
-    owner5.setOwnerFirstName("David");
-    owner5.setOwnerLastName("Brown");
+    Owner owner1 = new Owner(1, "John", "Doe", new VehicleCatalog(), LocalDate.of(2024, 2, 10));
+    Owner owner2 = new Owner(2, "Alice", "Smith", new VehicleCatalog(), LocalDate.of(2024, 3, 15));
+    Owner owner3 = new Owner(3, "Michael", "Johnson", new VehicleCatalog(), LocalDate.of(2024, 1, 20));
+    Owner owner4 = new Owner(4, "Emily", "Davis", new VehicleCatalog(), LocalDate.of(2024, 4, 5));
+    Owner owner5 = new Owner(5, "David", "Brown", new VehicleCatalog(), LocalDate.of(2024, 5, 12));
 
     // 添加 Owner 到目录
     ownerDirectory.addOwner(owner1);
@@ -189,31 +170,25 @@ public class MainJFrame extends javax.swing.JFrame {
     serviceCatalog.addService(service3);
 
     // 创建 Vehicle（车辆）并绑定到 Owner 和 Service
-    Vehicle vehicle1 = new Vehicle("Toyota", "Camry", 2020, "ABC123");
+    Vehicle vehicle1 = new Vehicle("1", "Toyota", "Camry", 2020, "ABC123", owner1);
+    Vehicle vehicle2 = new Vehicle("2", "Honda", "Civic", 2019, "XYZ789", owner2);
+    Vehicle vehicle3 = new Vehicle("3", "Toyota", "Camry", 2021, "LMN456", owner3);
+    Vehicle vehicle4 = new Vehicle("4", "Ford", "Mustang", 2018, "PQR678", owner4);
+    Vehicle vehicle5 = new Vehicle("5", "BMW", "X5", 2022, "DEF345", owner5);
+
+    // 显式添加服务到车辆
     vehicle1.addService(service1);
-    owner1.getVehicleCatalog().addVehicle(vehicle1);
-
-    Vehicle vehicle2 = new Vehicle("Honda", "Civic", 2019, "XYZ789");
+    vehicle1.addService(service2);
     vehicle2.addService(service2);
-    owner2.getVehicleCatalog().addVehicle(vehicle2);
-
-    Vehicle vehicle3 = new Vehicle("Toyota", "Camry", 2021, "LMN456"); // 车型与 vehicle1 相同
     vehicle3.addService(service3);
-    owner3.getVehicleCatalog().addVehicle(vehicle3);
-
-    Vehicle vehicle4 = new Vehicle("Ford", "Mustang", 2018, "PQR678");
     vehicle4.addService(service1);
-    owner4.getVehicleCatalog().addVehicle(vehicle4);
-
-    Vehicle vehicle5 = new Vehicle("BMW", "X5", 2022, "DEF345");
     vehicle5.addService(service2);
-    owner5.getVehicleCatalog().addVehicle(vehicle5);
 
     // 添加 Vehicle 到 VehicleCatalog
-    vehicleCatalog.addVehicle(vehicle1);
-    vehicleCatalog.addVehicle(vehicle2);
-    vehicleCatalog.addVehicle(vehicle3);
-    vehicleCatalog.addVehicle(vehicle4);
-    vehicleCatalog.addVehicle(vehicle5);
+    owner1.getVehicleCatalog().addVehicle(vehicle1);
+    owner2.getVehicleCatalog().addVehicle(vehicle2);
+    owner3.getVehicleCatalog().addVehicle(vehicle3);
+    owner4.getVehicleCatalog().addVehicle(vehicle4);
+    owner5.getVehicleCatalog().addVehicle(vehicle5);
     }   
 }

@@ -6,7 +6,6 @@
 package model;
 
 import java.time.LocalDate;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -64,7 +63,7 @@ public class Owner {
     }
     
     //constructor
-    public Owner(int ownerID, String ownerFirstName, String ownerLastName, LocalDate serviceDate) {
+    public Owner(int ownerID, String ownerFirstName, String ownerLastName, VehicleCatalog vehicleCatalog, LocalDate serviceDate) {
         this.ownerID = ownerID;
         this.ownerFirstName = ownerFirstName;
         this.ownerLastName = ownerLastName;

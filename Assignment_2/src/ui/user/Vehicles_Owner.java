@@ -14,10 +14,16 @@ package ui.user;
 import model.Owner;
 import model.OwnerDirectory;
 import java.awt.CardLayout;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import model.Service;
+import model.ServiceCatalog;
 import model.Vehicle;
 import ui.MainJFrame;
 
@@ -28,16 +34,50 @@ import ui.MainJFrame;
  */
 public class Vehicles_Owner extends javax.swing.JPanel {
 
-    private OwnerDirectory supplierDirectory;
+    private OwnerDirectory ownerDirectory;
+    private ServiceCatalog serviceCatalog;
     private JPanel workArea;
     
     /** Creates new form AddSupplier */
-    public Vehicles_Owner(JPanel workArea, OwnerDirectory supplierDirectory) {
+    public Vehicles_Owner(JPanel workArea, OwnerDirectory ownerDirectory, ServiceCatalog serviceCatalog) {
         initComponents();
         this.workArea = workArea;
-        this.supplierDirectory = supplierDirectory;
-    
+        this.ownerDirectory = ownerDirectory;
+        this.serviceCatalog = serviceCatalog;
+        
+        initializeServiceComboBox();
     }
+    
+    private void initializeServiceComboBox() {
+    // 清空下拉框
+    sevicCombo.removeAllItems();
+    
+    // 添加默认空项
+    sevicCombo.addItem("  ");
+    
+    // 检查 serviceCatalog 是否为空
+    if (serviceCatalog == null) {
+        sevicCombo.addItem("No services available");
+        return;
+    }
+    
+    // 使用 HashSet 防止重复
+    Set<String> uniqueServices = new HashSet<>();
+    
+    // 添加服务，确保不重复
+    for (Service service : serviceCatalog.getServiceList()) {
+        String serviceName = service.getServiceName();
+        if (serviceName != null && !serviceName.trim().isEmpty() && 
+            uniqueServices.add(serviceName)) {
+            sevicCombo.addItem(serviceName);
+        }
+    }
+    
+    // 如果没有服务，添加默认提示
+    if (sevicCombo.getItemCount() == 1) {
+        sevicCombo.addItem("No services available");
+    }
+}
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -277,41 +317,78 @@ public class Vehicles_Owner extends javax.swing.JPanel {
     String ownerId = txtOID.getText().trim();
     String firstName = txtFName.getText().trim();
     String lastName = txtLName.getText().trim();
-    String serviceDate = txtservDate.getText().trim();
+    String serviceDateText = txtservDate.getText().trim();
     String vehicleId = txtVehiID.getText().trim();
     String make = txtMake.getText().trim();
     String model = txtModel.getText().trim();
     String regNumber = txtReNum.getText().trim();
     String selectedService = (String) sevicCombo.getSelectedItem();
+    
+    // **验证 Service Date**
+    LocalDate serviceDate = null;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // 指定日期格式
 
-    // 验证必填字段
-    if (ownerId.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || 
-        vehicleId.isEmpty() || make.isEmpty() || model.isEmpty()) {
+    try {
+        if (serviceDateText.isEmpty()) {
+            serviceDate = LocalDate.now(); // 如果用户未输入，默认当前日期
+        } else {
+            serviceDate = LocalDate.parse(serviceDateText);
+        }
+    } catch (DateTimeParseException e) {
         JOptionPane.showMessageDialog(this,
-            "Please fill in all required fields",
-            "Warning",
-            JOptionPane.WARNING_MESSAGE);
+            "Invalid date format. Please use YYYY-MM-DD",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
         return;
+    }
+    
+    // 验证 Service ID 是否已存在
+    if (serviceCatalog.findServiceById(selectedService) != null) {
+        JOptionPane.showMessageDialog(this,
+            "Service ID already exists. Please enter a unique Service ID.",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+        return; // 阻止继续执行
+    }
+
+    // 验证 Vehicle ID 是否已存在
+    for (Owner owner : ownerDirectory.getOwnerList()) {
+        if (owner.getVehicleCatalog().findVehicle(vehicleId) != null) {
+            JOptionPane.showMessageDialog(this,
+                "Vehicle ID already exists. Please enter a unique Vehicle ID.",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+            return; // 阻止继续执行
+        }
     }
 
     try {
         // 创建并设置 Owner
-        Owner owner = supplierDirectory.addOwner();
+        Owner owner = ownerDirectory.addOwner();
         owner.setOwnerID(Integer.parseInt(ownerId));
         owner.setOwnerFirstName(firstName);
         owner.setOwnerLastName(lastName);
+        owner.setServiceDate(serviceDate);
 
         // 创建并设置 Vehicle
-        Vehicle vehicle = new Vehicle(make, model, 0, regNumber);  // 年份可以后续添加
+        Vehicle vehicle = new Vehicle();
         vehicle.setVehicleID(vehicleId);
-        
+        vehicle.setMake(make);
+        vehicle.setModel(model);
+        vehicle.setRegistrationNumber(regNumber);
+
         // 添加车辆到 Owner
         owner.getVehicleCatalog().addVehicle(vehicle);
 
-        // 如果选择了服务，创建服务记录
+        // 选择了服务，则添加
         if (selectedService != null && !selectedService.trim().isEmpty() && !"  ".equals(selectedService)) {
-            Service service = new Service(); // 需要设置适当的服务参数
-            vehicle.addService(service);
+            Service service = serviceCatalog.findServiceByName(selectedService);
+            if (service != null) {
+                vehicle.addService(service);
+                System.out.println("Service added to vehicle: " + service.getServiceName());
+            } else {
+                System.out.println("Service not found in ServiceCatalog: " + selectedService);
+            }
         }
 
         JOptionPane.showMessageDialog(this,
@@ -319,7 +396,7 @@ public class Vehicles_Owner extends javax.swing.JPanel {
             "Success",
             JOptionPane.INFORMATION_MESSAGE);
             
-        clearFields(); // 清空所有输入字段
+        clearFields(); // 清空输入字段
         backAction();
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this,
@@ -343,28 +420,50 @@ public class Vehicles_Owner extends javax.swing.JPanel {
 
     private void sevicComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sevicComboActionPerformed
         //TODO add your handling code here:
-        //获取MainJFrame实例
-        MainJFrame mainFrame = (MainJFrame) SwingUtilities.getWindowAncestor(this);
-
-        //存储用户选择的服务
-        String selectedService = (String) sevicCombo.getSelectedItem();
-        mainFrame.setSelectedService(selectedService);
-
-        System.out.println(mainFrame.getSelectedService());
+//    // 防止空指针异常
+//    if (serviceCatalog == null) return;
+//
+//    // 获取当前已存在的服务名称
+//    Set<String> existingServices = new HashSet<>();
+//    for (int i = 0; i < sevicCombo.getItemCount(); i++) {
+//        existingServices.add(sevicCombo.getItemAt(i));
+//    }
+//
+//    // 清空旧数据
+//    sevicCombo.removeAllItems();
+//    sevicCombo.addItem("  "); // 默认空项
+//
+//    // 添加所有服务
+//    for (Service service : serviceCatalog.getServiceList()) {
+//        String serviceName = service.getServiceName();
+//        if (serviceName != null && !serviceName.trim().isEmpty() && 
+//            !existingServices.contains(serviceName)) {
+//            sevicCombo.addItem(serviceName);
+//            System.out.println("Adding service: " + serviceName);
+//        }
+//    }
+//    
+//    // 如果没有服务，添加默认提示
+//    if (sevicCombo.getItemCount() == 1) {
+//        sevicCombo.addItem("No services available");
+//    }
     }//GEN-LAST:event_sevicComboActionPerformed
 
     private void sevicComboComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_sevicComboComponentShown
         // TODO add your handling code here:
-        // ✅ 获取 `MainJFrame` 实例
-        MainJFrame mainFrame = (MainJFrame) SwingUtilities.getWindowAncestor(this);
-
-        // ✅ 获取之前存储的 selectedService
-        String storedService = mainFrame.getSelectedService();
-
-        // ✅ 如果之前有选择的服务，就在 JComboBox 里自动选中它
-        if (storedService != null && !storedService.isEmpty()) {
-            sevicCombo.setSelectedItem(storedService);
-            System.out.println(storedService);
+        // 获取 MainJFrame 实例
+    MainJFrame mainFrame = (MainJFrame) SwingUtilities.getWindowAncestor(this);
+    
+    // 获取之前存储的 selectedService
+    String storedService = mainFrame.getSelectedService();
+    
+    // 重新初始化服务列表（确保只初始化一次）
+    initializeServiceComboBox();
+    
+    // 如果之前有选择的服务，就在 JComboBox 里自动选中它
+    if (storedService != null && !storedService.isEmpty()) {
+        sevicCombo.setSelectedItem(storedService);
+        System.out.println(storedService);
     }
     }//GEN-LAST:event_sevicComboComponentShown
 

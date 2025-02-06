@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Service;
+import model.ServiceCatalog;
 import model.Vehicle;
 import model.VehicleCatalog;
 
@@ -32,6 +33,7 @@ public class ManageVehicles extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
     private OwnerDirectory ownerDirectory;
+    private ServiceCatalog serviceCatalog;
     
     /** Creates new form ManageSuppliers */
     public ManageVehicles(JPanel upc, OwnerDirectory od) {
@@ -58,7 +60,7 @@ public class ManageVehicles extends javax.swing.JPanel {
                 // 检查是否有服务记录
                 if (!vehicle.getServicesOpted().isEmpty()) {
                     Service service = vehicle.getServicesOpted().get(0);
-                    row[2] = service.getServiceType();
+                    row[2] = service.getServiceName();
                     row[3] = service.getCost();
                 } else {
                     row[2] = "No Service";
@@ -196,53 +198,65 @@ public class ManageVehicles extends javax.swing.JPanel {
             return;
         }
 
-        Owner owner = (Owner)tblVehicles.getValueAt(row, 0);
-        ViewVehiclesDetails vd = new ViewVehiclesDetails(userProcessContainer, owner);
-        userProcessContainer.add("ViewVehicleDetails", vd);
-        CardLayout layout = (CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
+        try {
+            // 2. Get ownerID and vehicleID from selected row
+            int ownerID = Integer.parseInt(tblVehicles.getValueAt(row, 0).toString());
+            String vehicleID = tblVehicles.getValueAt(row, 1).toString();
+
+            // 3. Find the owner by ID
+            Owner owner = null;
+            for(Owner o : ownerDirectory.getOwnerList()) {
+                if(o.getOwnerID() == ownerID) {
+                    owner = o;
+                    break;
+                }
+            }
+
+            if(owner == null) {
+                JOptionPane.showMessageDialog(null, "Owner not found", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // 4. Create and show details panel
+            ViewVehiclesDetails vd = new ViewVehiclesDetails(userProcessContainer, owner);
+            userProcessContainer.add("ViewVehicleDetails", vd);
+            CardLayout layout = (CardLayout)userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+
+            } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error viewing details: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnviewdetailActionPerformed
 
     private void btnsearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsearchActionPerformed
         // TODO add your handling code here:
         String searchInput = TextSearchField.getText().trim();
-    DefaultTableModel model = (DefaultTableModel) tblVehicles.getModel();
-    model.setRowCount(0);  // 清空表格
+        DefaultTableModel model = (DefaultTableModel) tblVehicles.getModel();
+        model.setRowCount(0);
+
+        if (searchInput.isEmpty()) {
+            refreshTable();
+            return;
+        }
     
-    if (!searchInput.isEmpty()) {
         boolean found = false;
-        
         for (Owner owner : ownerDirectory.getOwnerList()) {
-            VehicleCatalog catalog = owner.getVehicleCatalog();
-            ArrayList<Vehicle> results = catalog.searchVehicles(searchInput);
-            
-            if (!results.isEmpty()) {
-                found = true;
-                for (Vehicle vehicle : results) {
-                    Object[] row = new Object[4];
-                    row[0] = owner.getOwnerID();
-                    row[1] = vehicle.getVehicleID();
-                    if (!vehicle.getServicesOpted().isEmpty()) {
-                        Service service = vehicle.getServicesOpted().get(0);
-                        row[2] = service.getServiceType();
-                        row[3] = service.getCost();
-                    } else {
-                        row[2] = "No Service";
-                        row[3] = 0.0;
-                    }
-                    model.addRow(row);
-                }
+            // 使用 searchVehicles 方法搜索
+            ArrayList<Vehicle> matchedVehicles = owner.getVehicleCatalog().searchVehicles(searchInput);
+
+            if (!matchedVehicles.isEmpty()) {
+            found = true;
+            for (Vehicle vehicle : matchedVehicles) {
+                addVehicleToTable(owner, vehicle, model);
             }
         }
-        
-        if (!found) {
-            JOptionPane.showMessageDialog(this, 
-                "No matching records found.", 
-                "Search Result", 
-                JOptionPane.INFORMATION_MESSAGE);
-            refreshTable();
-        }
-    } else {
+    }
+    
+    if (!found) {
+        JOptionPane.showMessageDialog(this, 
+            "No matching records found.", 
+            "Search Result", 
+            JOptionPane.INFORMATION_MESSAGE);
         refreshTable();
     }
     }//GEN-LAST:event_btnsearchActionPerformed
@@ -250,14 +264,49 @@ public class ManageVehicles extends javax.swing.JPanel {
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         // TODO add your handling code here:
         int row = tblVehicles.getSelectedRow();
-        
-        if(row<0) {
-            JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+    
+    if (row < 0) {
+        JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    try {
+        int ownerID = Integer.parseInt(tblVehicles.getValueAt(row, 0).toString());
+        String vehicleID = tblVehicles.getValueAt(row, 1).toString();
+
+        // 查找 Owner
+        Owner owner = null;
+        for (Owner o : ownerDirectory.getOwnerList()) {
+            if (o.getOwnerID() == ownerID) {
+                owner = o;
+                break;
+            }
+        }
+
+        if (owner == null) {
+            JOptionPane.showMessageDialog(null, "Owner not found", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        Owner s = (Owner)tblVehicles.getValueAt(row, 0);
-        ownerDirectory.removeOwner(s);
-        refreshTable();
+
+        // 确认删除
+        int confirmation = JOptionPane.showConfirmDialog(null, 
+            "Are you sure you want to delete this vehicle?", 
+            "Confirm Deletion", 
+            JOptionPane.YES_NO_OPTION);
+        
+        if (confirmation == JOptionPane.YES_OPTION) {
+            // 直接删除车辆
+            boolean removed = owner.getVehicleCatalog().removeVehicle(vehicleID);
+            if (removed) {
+                JOptionPane.showMessageDialog(null, "Vehicle deleted successfully");
+                refreshTable(); // 更新 JTable
+            } else {
+                JOptionPane.showMessageDialog(null, "Vehicle not found", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error deleting vehicle: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -292,5 +341,19 @@ public class ManageVehicles extends javax.swing.JPanel {
     private javax.swing.JTable tblVehicles;
     // End of variables declaration//GEN-END:variables
 
+    private void addVehicleToTable(Owner owner, Vehicle vehicle,DefaultTableModel model) {
+    Object[] row = new Object[4];
+    row[0] = owner.getOwnerID();
+    row[1] = vehicle.getVehicleID();
+    if (!vehicle.getServicesOpted().isEmpty()) {
+        Service service = vehicle.getServicesOpted().get(0);
+        row[2] = service.getServiceName();
+        row[3] = service.getCost();
+    } else {
+        row[2] = "No Service";
+        row[3] = 0.0;
+    }
+    model.addRow(row);
+}
 
 }
