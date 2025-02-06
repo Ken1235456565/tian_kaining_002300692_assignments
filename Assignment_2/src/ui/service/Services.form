@@ -119,6 +119,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtServID">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtServIDActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTitle">
       <Properties>
@@ -147,8 +150,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtServType">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtServTypeActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCost">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCostActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCost">
       <Properties>
@@ -156,6 +165,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtName1">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtName1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblName1">
       <Properties>
@@ -168,6 +180,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtName2">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtName2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblName5">
       <Properties>
@@ -175,6 +190,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtName5">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtName5ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -36,14 +36,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Services extends javax.swing.JPanel {
 
     private JPanel workArea;
-    private OwnerDirectory supplierDirectory;
+    private OwnerDirectory ownerDirectory;
     ImageIcon logoImage;
     
     /** Creates new form AddSupplier */
     public Services(JPanel workArea, OwnerDirectory supplierDirectory) {
         initComponents();
         this.workArea = workArea;
-        this.supplierDirectory = supplierDirectory;
+        this.ownerDirectory = ownerDirectory;
     
     }
 
@@ -76,6 +76,12 @@ public class Services extends javax.swing.JPanel {
 
         lblServID.setText("Service lD:");
 
+        txtServID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtServIDActionPerformed(evt);
+            }
+        });
+
         lblTitle.setText("Services");
 
         btnCreateService.setText("Create Service");
@@ -94,13 +100,43 @@ public class Services extends javax.swing.JPanel {
 
         lblServType.setText("Service Type:");
 
+        txtServType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtServTypeActionPerformed(evt);
+            }
+        });
+
+        txtCost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCostActionPerformed(evt);
+            }
+        });
+
         lblCost.setText("Cost:");
+
+        txtName1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtName1ActionPerformed(evt);
+            }
+        });
 
         lblName1.setText("Mechanic's Name1:");
 
         lblName2.setText("Mechanic's Name2:");
 
+        txtName2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtName2ActionPerformed(evt);
+            }
+        });
+
         lblName5.setText("Service Duration:");
+
+        txtName5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtName5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -194,9 +230,8 @@ public class Services extends javax.swing.JPanel {
             return;
         }
 
-        Owner supplier = supplierDirectory.addSupplier();
-        supplier.setSupplyName(name);
-        supplier.setLogoImage(logoImage);
+        Owner owner = ownerDirectory.addOwner();
+        owner.setOwnerName(name);
 
         JOptionPane.showMessageDialog(this,
             "Supplier successfully added",
@@ -205,6 +240,30 @@ public class Services extends javax.swing.JPanel {
 
         backAction();
     }//GEN-LAST:event_btnCreateServiceActionPerformed
+
+    private void txtServIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtServIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtServIDActionPerformed
+
+    private void txtServTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtServTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtServTypeActionPerformed
+
+    private void txtCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCostActionPerformed
+
+    private void txtName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtName1ActionPerformed
+
+    private void txtName2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtName2ActionPerformed
+
+    private void txtName5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtName5ActionPerformed
 
       
       private void backAction() {

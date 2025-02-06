@@ -18,20 +18,23 @@ public class Service {
     private double cost;
     private String mechanicName;
     private int serviceDuration; // 服务时长（单位：分钟）
-    private Vehicle vehicle; // 绑定的车辆
 
     // 无参构造函数
     public Service() {
+        this.serviceID = 0;
+        this.serviceType = "Unknown";
+        this.cost = 0.0;
+        this.mechanicName = "Unknown";
+        this.serviceDuration = 0;
     }
 
     // 带参数的构造函数
-    public Service(int serviceID, String serviceType, double cost, String mechanicName, int serviceDuration, Vehicle vehicle) {
+    public Service(int serviceID, String serviceType, double cost, String mechanicName, int serviceDuration) {
         this.serviceID = serviceID;
         this.serviceType = serviceType;
         this.cost = cost;
         this.mechanicName = mechanicName;
         this.serviceDuration = serviceDuration;
-        this.vehicle = vehicle;
     }
 
     // Getters & Setters
@@ -74,15 +77,6 @@ public class Service {
     public void setServiceDuration(int serviceDuration) {
         this.serviceDuration = serviceDuration;
     }
-
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-
 }
 
 

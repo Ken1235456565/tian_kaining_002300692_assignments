@@ -83,6 +83,12 @@ public class Vehicles_Owner extends javax.swing.JPanel {
 
         lblName.setText("Owner ID:");
 
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
+
         lblTitle.setText("Owner Details");
 
         btnAdd.setText("Add");
@@ -101,17 +107,59 @@ public class Vehicles_Owner extends javax.swing.JPanel {
 
         lblFName.setText("NameOwner First Name");
 
+        txtFName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFNameActionPerformed(evt);
+            }
+        });
+
+        txtservDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtservDateActionPerformed(evt);
+            }
+        });
+
+        txtLName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLNameActionPerformed(evt);
+            }
+        });
+
         lblLName.setText("Owner Last Name:");
 
         lblServDate.setText("Service Date:");
 
         lblTitle1.setText("Vehicle Details");
 
+        txtVehiID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtVehiIDActionPerformed(evt);
+            }
+        });
+
         lblMake.setText("Make:");
+
+        txtMake.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMakeActionPerformed(evt);
+            }
+        });
+
+        txtModel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtModelActionPerformed(evt);
+            }
+        });
 
         lblModel.setText("Model:");
 
         lblReNum.setText("Registration Number:");
+
+        txtReNum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtReNumActionPerformed(evt);
+            }
+        });
 
         sevicCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", "Oil Change", "Car Wash", "Puncture" }));
         sevicCombo.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -267,6 +315,38 @@ public class Vehicles_Owner extends javax.swing.JPanel {
     private void sevicComboComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_sevicComboComponentShown
         // TODO add your handling code here:
     }//GEN-LAST:event_sevicComboComponentShown
+
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNameActionPerformed
+
+    private void txtFNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFNameActionPerformed
+
+    private void txtLNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLNameActionPerformed
+
+    private void txtservDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtservDateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtservDateActionPerformed
+
+    private void txtVehiIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVehiIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtVehiIDActionPerformed
+
+    private void txtMakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMakeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMakeActionPerformed
+
+    private void txtModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtModelActionPerformed
+
+    private void txtReNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReNumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtReNumActionPerformed
 
       
       private void backAction() {

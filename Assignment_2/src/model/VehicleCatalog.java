@@ -16,8 +16,12 @@ public class VehicleCatalog {
     
     private ArrayList<Vehicle> vehicleCatalog;
     
+    // constru
     public VehicleCatalog() {
-        vehicleCatalog = new ArrayList<>();
+        this.vehicleCatalog = new ArrayList<>();
+    }
+    public VehicleCatalog(ArrayList<Vehicle> vehicleCatalog) {
+        this.vehicleCatalog = (vehicleCatalog != null) ? vehicleCatalog : new ArrayList<>();
     }
 
     // 获取所有车辆
@@ -43,7 +47,7 @@ public class VehicleCatalog {
     }
 
     // 通过 ID 搜索车辆
-    public Vehicle searchVehicle(int id) {
+    public Vehicle searchVehicle(String id) {
         for (Vehicle v : vehicleCatalog) {
             if (v.getVehicleID() == id) { // getId() 改为 getVehicleID()
                 return v;

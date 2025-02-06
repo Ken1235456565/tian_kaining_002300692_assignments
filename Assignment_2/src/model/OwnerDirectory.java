@@ -13,12 +13,15 @@ import java.util.ArrayList;
  */
 public class OwnerDirectory {
     
-    private ArrayList<Owner> ownerList;
-    
+    private ArrayList<Owner> ownerList;   
+    //constructor
+    public OwnerDirectory(ArrayList<Owner> ownerList) {
+        this.ownerList = (ownerList != null) ? ownerList : new ArrayList<>();
+    }
     public OwnerDirectory() {
         ownerList = new ArrayList<>();
     }
-
+    
     // 获取所有 Owner 列表
     public ArrayList<Owner> getOwnerList() {
         return ownerList;

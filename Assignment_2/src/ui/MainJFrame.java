@@ -6,29 +6,41 @@
 package ui;
 
 import java.awt.CardLayout;
+import java.time.LocalDate;
 import model.Owner;
 import model.OwnerDirectory;
+import model.VehicleCatalog;
+import model.Service;
+import model.Vehicle;
+import model.ServiceCatalog;
 
 /**
  *
  * @author archil
  */
 public class MainJFrame extends javax.swing.JFrame {
-
     private OwnerDirectory ownerDirectory;
+    private Service service;
+    private VehicleCatalog vehicleCatalog;
+    private ServiceCatalog serviceCatalog;
     
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame() {
         initComponents(); // NetBeans 生成的 UI 代码
-
         ownerDirectory = new OwnerDirectory(); // 初始化车主目录
+        mainWorkArea = new javax.swing.JPanel();
+        mainWorkArea.setLayout(new CardLayout());
+        
+        // basic setings
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(800, 600);
         setResizable(false);
+        getContentPane().add(mainWorkArea); // 加载导航界面
 
         populateDemoData(); // 预填充测试数据
-        setNavigationPage(); // 加载导航界面
+        setNavigationPage(); // 设置导航页面
     }
 
     /**
@@ -113,15 +125,76 @@ public class MainJFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void populateDemoData() {
-        Owner owner1 = new Owner();
-        owner1.setOwnerFirstName("John");
-        owner1.setOwnerLastName("Doe");
-        ownerDirectory.addOwner(owner1);
 
-        Owner owner2 = new Owner();
-        owner2.setOwnerFirstName("Alice");
-        owner2.setOwnerLastName("Smith");
-        ownerDirectory.addOwner(owner2);
-    }
-    
+    // 创建 Owner（车主）
+    Owner owner1 = new Owner();
+    owner1.setOwnerID(1);
+    owner1.setOwnerFirstName("John");
+    owner1.setOwnerLastName("Doe");
+
+    Owner owner2 = new Owner();
+    owner2.setOwnerID(2);
+    owner2.setOwnerFirstName("Alice");
+    owner2.setOwnerLastName("Smith");
+
+    Owner owner3 = new Owner();
+    owner3.setOwnerID(3);
+    owner3.setOwnerFirstName("Michael");
+    owner3.setOwnerLastName("Johnson");
+
+    Owner owner4 = new Owner();
+    owner4.setOwnerID(4);
+    owner4.setOwnerFirstName("Emily");
+    owner4.setOwnerLastName("Davis");
+
+    Owner owner5 = new Owner();
+    owner5.setOwnerID(5);
+    owner5.setOwnerFirstName("David");
+    owner5.setOwnerLastName("Brown");
+
+    // 添加 Owner 到目录
+    ownerDirectory.addOwner(owner1);
+    ownerDirectory.addOwner(owner2);
+    ownerDirectory.addOwner(owner3);
+    ownerDirectory.addOwner(owner4);
+    ownerDirectory.addOwner(owner5);
+
+    // 创建 Service（服务）
+    Service service1 = new Service(101, "Oil Change", 50.0, "Mike", 30);
+    Service service2 = new Service(102, "Car Wash", 20.0, "Sara", 15);
+    Service service3 = new Service(103, "Tire Replacement", 80.0, "Tom", 60);
+
+    // 添加 Service 到 ServiceCatalog
+    serviceCatalog.addService(service1);
+    serviceCatalog.addService(service2);
+    serviceCatalog.addService(service3);
+
+    // 创建 Vehicle（车辆）并绑定到 Owner 和 Service
+    Vehicle vehicle1 = new Vehicle("Toyota", "Camry", 2020, "ABC123");
+    vehicle1.addService(service1);
+    owner1.getVehicleCatalog().addVehicle(vehicle1);
+
+    Vehicle vehicle2 = new Vehicle("Honda", "Civic", 2019, "XYZ789");
+    vehicle2.addService(service2);
+    owner2.getVehicleCatalog().addVehicle(vehicle2);
+
+    Vehicle vehicle3 = new Vehicle("Toyota", "Camry", 2021, "LMN456"); // 车型与 vehicle1 相同
+    vehicle3.addService(service3);
+    owner3.getVehicleCatalog().addVehicle(vehicle3);
+
+    Vehicle vehicle4 = new Vehicle("Ford", "Mustang", 2018, "PQR678");
+    vehicle4.addService(service1);
+    owner4.getVehicleCatalog().addVehicle(vehicle4);
+
+    Vehicle vehicle5 = new Vehicle("BMW", "X5", 2022, "DEF345");
+    vehicle5.addService(service2);
+    owner5.getVehicleCatalog().addVehicle(vehicle5);
+
+    // 添加 Vehicle 到 VehicleCatalog
+    vehicleCatalog.addVehicle(vehicle1);
+    vehicleCatalog.addVehicle(vehicle2);
+    vehicleCatalog.addVehicle(vehicle3);
+    vehicleCatalog.addVehicle(vehicle4);
+    vehicleCatalog.addVehicle(vehicle5);
+    }   
 }

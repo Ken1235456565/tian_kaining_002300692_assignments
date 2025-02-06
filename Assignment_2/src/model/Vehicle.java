@@ -13,25 +13,26 @@ import java.util.ArrayList;
  */
 public class Vehicle {
     
-    private int vehicleID; // 车辆 ID
+    private String vehicleID; // 车辆 ID
     private String make; // 制造商（如 Toyota, Honda）
     private String model; // 车型（如 Camry）
     private int year; // 生产年份
     private String registrationNumber; // 车牌号
     private ArrayList<Service> servicesOpted; // 选择的服务
 
-    // 车辆 ID 计数器，确保每辆车的 ID 是唯一的
-    private static int count = 1;
-
     // 无参构造函数（自动分配 vehicleID）
     public Vehicle() {
-        this.vehicleID = count++;
+        this.vehicleID = vehicleID;
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.registrationNumber = registrationNumber;
         this.servicesOpted = new ArrayList<>();
     }
 
     // 带参数的构造函数
     public Vehicle(String make, String model, int year, String registrationNumber) {
-        this.vehicleID = count++;
+        this.vehicleID = vehicleID;
         this.make = make;
         this.model = model;
         this.year = year;
@@ -40,7 +41,7 @@ public class Vehicle {
     }
 
     // Getters & Setters
-    public int getVehicleID() {
+    public String getVehicleID() {
         return vehicleID;
     }
 

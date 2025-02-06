@@ -58,7 +58,19 @@ public class Owner {
     public void setServiceDate(LocalDate serviceDate) {
         this.serviceDate = serviceDate;
     }
-
+    
+    public Owner() {
+        this.vehicleCatalog = new VehicleCatalog(); //each Owner have VehicleCatalog!
+    }
+    
+    //constructor
+    public Owner(int ownerID, String ownerFirstName, String ownerLastName, LocalDate serviceDate) {
+        this.ownerID = ownerID;
+        this.ownerFirstName = ownerFirstName;
+        this.ownerLastName = ownerLastName;
+        this.serviceDate = serviceDate;
+        this.vehicleCatalog = new VehicleCatalog(); // 初始化 VehicleCatalog
+    }
     
     @Override
     public String toString() {

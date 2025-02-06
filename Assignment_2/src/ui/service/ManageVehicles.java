@@ -27,13 +27,13 @@ import javax.swing.table.DefaultTableModel;
 public class ManageVehicles extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-    private OwnerDirectory supplierDirectory;
+    private OwnerDirectory ownerDirectory;
     
     /** Creates new form ManageSuppliers */
-    public ManageVehicles(JPanel upc, OwnerDirectory sd) {
+    public ManageVehicles(JPanel upc, OwnerDirectory od) {
         initComponents();
         userProcessContainer = upc;
-        supplierDirectory = sd;
+        ownerDirectory = od;
         refreshTable();
     }
     
@@ -42,7 +42,7 @@ public class ManageVehicles extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel)tblSuppliers.getModel();
         model.setRowCount(0);
         
-        for(Owner s : supplierDirectory.getSupplierList()) {
+        for(Owner s : ownerDirectory.getOwnerList()) {
             Object row[] = new Object[1];
             row[0] = s;
            // row[1] = s.getProductCatalog().getProductCount() == 0 ? "None" : s.getProductCatalog().getProductCount();
@@ -66,7 +66,7 @@ public class ManageVehicles extends javax.swing.JPanel {
         btnView = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         lblSupplierList = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        TextSearchField = new javax.swing.JTextField();
         btnAdd1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -109,6 +109,12 @@ public class ManageVehicles extends javax.swing.JPanel {
 
         lblSupplierList.setText("Manage Vehicles:");
 
+        TextSearchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextSearchFieldActionPerformed(evt);
+            }
+        });
+
         btnAdd1.setText("Back");
         btnAdd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,7 +138,7 @@ public class ManageVehicles extends javax.swing.JPanel {
                             .addComponent(btnRemove))
                         .addComponent(lblSupplierList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnView))))
                 .addContainerGap(57, Short.MAX_VALUE))
@@ -149,7 +155,7 @@ public class ManageVehicles extends javax.swing.JPanel {
                 .addComponent(lblSupplierList, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnView))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -165,7 +171,7 @@ public class ManageVehicles extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         //int i=1;
-        Services as = new Services(userProcessContainer, supplierDirectory);
+        Services as = new Services(userProcessContainer, ownerDirectory);
         userProcessContainer.add("AddSupplier", as);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -195,7 +201,7 @@ public class ManageVehicles extends javax.swing.JPanel {
             return;
         }
         Owner s = (Owner)tblSuppliers.getValueAt(row, 0);
-        supplierDirectory.removeSupplier(s);
+        ownerDirectory.removeOwner(s);
         refreshTable();
     }//GEN-LAST:event_btnRemoveActionPerformed
 
@@ -203,14 +209,18 @@ public class ManageVehicles extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAdd1ActionPerformed
 
+    private void TextSearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextSearchFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextSearchFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField TextSearchField;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAdd1;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnView;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblSupplierList;
     private javax.swing.JTable tblSuppliers;
     // End of variables declaration//GEN-END:variables
