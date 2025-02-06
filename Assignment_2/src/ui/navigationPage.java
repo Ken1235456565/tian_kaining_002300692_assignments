@@ -119,7 +119,7 @@ public class NavigationPage extends javax.swing.JPanel {
 
     private void btnManageVehiclesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVehiclesActionPerformed
         // TODO add your handling code here:
-        ManageVehicles panel = new ManageVehicles(mainWorkArea, od);
+        ManageVehicles panel = new ManageVehicles(mainWorkArea, ownerDirectory);
         mainWorkArea.add("ManageVehiclesPanel", panel);
         ((CardLayout) mainWorkArea.getLayout()).next(mainWorkArea);
     }//GEN-LAST:event_btnManageVehiclesActionPerformed

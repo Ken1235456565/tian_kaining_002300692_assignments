@@ -7,6 +7,7 @@ package ui.service;
 import model.Vehicle;
 import model.Owner;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,7 +18,8 @@ import javax.swing.table.DefaultTableModel;
 public class ViewVehiclesDetails extends javax.swing.JPanel {
 
     JPanel workArea;
-    Owner supplier;
+    Owner owner;
+    Vehicle vehicles;
     
     /**
      * Creates new form ViewSupplier
@@ -25,26 +27,39 @@ public class ViewVehiclesDetails extends javax.swing.JPanel {
     public ViewVehiclesDetails(JPanel workArea, Owner supplier) {
         initComponents();
         this.workArea = workArea;
-        this.supplier = supplier;
+        this.owner = owner;
+        this.vehicles = vehicles;
+   
         
-        lblSupplierName.setText(supplier.getSupplyName());
-        
-        refreshTable();
+        populateFields();
         
     }
     
-    private void refreshTable() {
+    public void populateFields() {
         
-        DefaultTableModel model = (DefaultTableModel)productCatalog.getModel();
-        model.setRowCount(0);
+        // 填充Owner信息
+        txtName.setText(owner.getOwnerName());
+        txtFName.setText(owner.getOwnerFirstName());
+        txtLName.setText(owner.getOwnerLastName());
+        txtservDate.setText(owner.getServiceDate().toString());
         
-        for(Vehicle p : supplier.getProductCatalog().getProductCatalog()) {
-            Object row[] = new Object[3];
-            row[0] = p;
-            row[1] = p.getId();
-            row[2] = p.getPrice();
-            model.addRow(row);
-        }
+        // 填充Vehicle信息
+        txtVehiID.setText(vehicles.getVehicleID());
+        txtMake.setText(vehicles.getMake());
+        txtModel.setText(vehicles.getModel());
+        txtReNum.setText(vehicles.getRegistrationNumber());
+        txtReNum1.setText(vehicles.getServicesOpted().toString());
+        
+        // 设置所有文本框为不可编辑
+        txtName.setEditable(false);
+        txtFName.setEditable(false);
+        txtLName.setEditable(false);
+        txtservDate.setEditable(false);
+        txtVehiID.setEditable(false);
+        txtMake.setEditable(false);
+        txtModel.setEditable(false);
+        txtReNum.setEditable(false);
+        txtReNum1.setEditable(false);
     }
 
     /**
@@ -210,7 +225,13 @@ public class ViewVehiclesDetails extends javax.swing.JPanel {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        backAction();
+        workArea.remove(this);
+        Component[] componentArray = workArea.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        ManageVehicles manageVehiclesJPanel = (ManageVehicles) component;
+        manageVehiclesJPanel.refreshTable();
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.previous(workArea);
     }//GEN-LAST:event_backButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

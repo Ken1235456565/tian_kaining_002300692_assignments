@@ -243,26 +243,70 @@ public class Services extends javax.swing.JPanel {
 
     private void txtServIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtServIDActionPerformed
         // TODO add your handling code here:
+        try {
+            String serviceID = txtServID.getText().trim(); // 获取并转换 ID
+            System.out.println("Service ID set to: " + serviceID);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid Service ID! Please enter a number.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_txtServIDActionPerformed
 
     private void txtServTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtServTypeActionPerformed
         // TODO add your handling code here:
+        String serviceType = txtServType.getText().trim(); // 获取文本
+        if (serviceType.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Service Type cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            System.out.println("Service Type set to: " + serviceType);
+        }
     }//GEN-LAST:event_txtServTypeActionPerformed
 
     private void txtCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostActionPerformed
         // TODO add your handling code here:
+        try {
+        double cost = Double.parseDouble(txtCost.getText().trim()); // 转换为 double
+        if (cost < 0) {
+                JOptionPane.showMessageDialog(this, "Cost cannot be negative!", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                System.out.println("Service Cost set to: $" + cost);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid Cost! Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_txtCostActionPerformed
 
     private void txtName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName1ActionPerformed
         // TODO add your handling code here:
+        String mechanicName = txtName1.getText().trim();
+        if (mechanicName.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mechanic name cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            System.out.println("Mechanic Name set to: " + mechanicName);
+        }
     }//GEN-LAST:event_txtName1ActionPerformed
 
     private void txtName2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName2ActionPerformed
         // TODO add your handling code here:
+        try {
+        int duration = Integer.parseInt(txtName2.getText().trim());
+        if (duration <= 0) {
+                JOptionPane.showMessageDialog(this, "Service Duration must be greater than 0!", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                System.out.println("Service Duration set to: " + duration + " minutes");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Invalid Duration! Please enter a number.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_txtName2ActionPerformed
 
     private void txtName5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName5ActionPerformed
         // TODO add your handling code here:
+        String registrationNumber = txtName5.getText().trim();
+        if (registrationNumber.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Registration Number cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            System.out.println("Vehicle Registration Number set to: " + registrationNumber);
+        }
     }//GEN-LAST:event_txtName5ActionPerformed
 
       

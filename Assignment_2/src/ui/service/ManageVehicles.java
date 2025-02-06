@@ -39,7 +39,7 @@ public class ManageVehicles extends javax.swing.JPanel {
     
     public void refreshTable() {
         
-        DefaultTableModel model = (DefaultTableModel)tblSuppliers.getModel();
+        DefaultTableModel model = (DefaultTableModel)tblVehicles.getModel();
         model.setRowCount(0);
         
         for(Owner s : ownerDirectory.getOwnerList()) {
@@ -60,20 +60,20 @@ public class ManageVehicles extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblSuppliers = new javax.swing.JTable();
+        srlVehicles = new javax.swing.JScrollPane();
+        tblVehicles = new javax.swing.JTable();
         btnRemove = new javax.swing.JButton();
         btnView = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
-        lblSupplierList = new javax.swing.JLabel();
+        lblVehicleList = new javax.swing.JLabel();
         TextSearchField = new javax.swing.JTextField();
-        btnAdd1 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        srlVehicles.setBackground(new java.awt.Color(255, 255, 255));
 
-        tblSuppliers.setModel(new javax.swing.table.DefaultTableModel(
+        tblVehicles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -84,7 +84,7 @@ public class ManageVehicles extends javax.swing.JPanel {
                 "Owner lD", "Vehicle lD", "Service Opted", "Cost"
             }
         ));
-        jScrollPane1.setViewportView(tblSuppliers);
+        srlVehicles.setViewportView(tblVehicles);
 
         btnRemove.setText("Delete Account");
         btnRemove.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +107,7 @@ public class ManageVehicles extends javax.swing.JPanel {
             }
         });
 
-        lblSupplierList.setText("Manage Vehicles:");
+        lblVehicleList.setText("Manage Vehicles:");
 
         TextSearchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,10 +115,10 @@ public class ManageVehicles extends javax.swing.JPanel {
             }
         });
 
-        btnAdd1.setText("Back");
-        btnAdd1.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdd1ActionPerformed(evt);
+                btnBackActionPerformed(evt);
             }
         });
 
@@ -129,14 +129,14 @@ public class ManageVehicles extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAdd1)
+                    .addComponent(btnBack)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(srlVehicles, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(btnAdd)
                             .addGap(32, 32, 32)
                             .addComponent(btnRemove))
-                        .addComponent(lblSupplierList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblVehicleList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(TextSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -150,15 +150,15 @@ public class ManageVehicles extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(btnAdd1)
+                .addComponent(btnBack)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblSupplierList, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblVehicleList, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnView))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(srlVehicles, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
@@ -179,13 +179,13 @@ public class ManageVehicles extends javax.swing.JPanel {
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
-        int row = tblSuppliers.getSelectedRow();
+        int row = tblVehicles.getSelectedRow();
         if(row<0) {
             JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
-        Owner s = (Owner)tblSuppliers.getValueAt(row, 0);
+        Owner s = (Owner)tblVehicles.getValueAt(row, 0);
         ViewVehiclesDetails vs = new ViewVehiclesDetails(userProcessContainer, s);
         userProcessContainer.add("ViewSupplier", vs);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
@@ -194,35 +194,48 @@ public class ManageVehicles extends javax.swing.JPanel {
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         // TODO add your handling code here:
-        int row = tblSuppliers.getSelectedRow();
+        int row = tblVehicles.getSelectedRow();
         
         if(row<0) {
             JOptionPane.showMessageDialog(null, "Please select a row from the table first", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        Owner s = (Owner)tblSuppliers.getValueAt(row, 0);
+        Owner s = (Owner)tblVehicles.getValueAt(row, 0);
         ownerDirectory.removeOwner(s);
         refreshTable();
     }//GEN-LAST:event_btnRemoveActionPerformed
 
-    private void btnAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd1ActionPerformed
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAdd1ActionPerformed
+        userProcessContainer.remove(this);
+        ((CardLayout) userProcessContainer.getLayout()).previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
 
     private void TextSearchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextSearchFieldActionPerformed
         // TODO add your handling code here:
+        String searchKey = TextSearchField.getText().trim();
+        if (!searchKey.isEmpty()) {
+            Owner result = ownerDirectory.searchOwner(searchKey);
+            if (result != null) {
+                System.out.println("Found Owner: " + result.getOwnerFirstName() + " " + result.getOwnerLastName());
+
+            }
+        } else {
+        refreshTable(); // 确保你有一个方法来刷新界面数据
+        }
     }//GEN-LAST:event_TextSearchFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField TextSearchField;
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnAdd1;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnView;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblSupplierList;
-    private javax.swing.JTable tblSuppliers;
+    private javax.swing.JLabel lblVehicleList;
+    private javax.swing.JScrollPane srlVehicles;
+    private javax.swing.JTable tblVehicles;
     // End of variables declaration//GEN-END:variables
+
 
 }

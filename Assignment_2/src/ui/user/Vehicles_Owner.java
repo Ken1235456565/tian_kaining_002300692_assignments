@@ -37,7 +37,7 @@ import ui.service.ManageVehicles;
 public class Vehicles_Owner extends javax.swing.JPanel {
 
     private OwnerDirectory supplierDirectory;
-    ImageIcon logoImage;
+    private JPanel workArea;
     
     /** Creates new form AddSupplier */
     public Vehicles_Owner(JPanel workArea, OwnerDirectory supplierDirectory) {
@@ -57,7 +57,7 @@ public class Vehicles_Owner extends javax.swing.JPanel {
     private void initComponents() {
 
         lblName = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
+        txtOID = new javax.swing.JTextField();
         lblTitle = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
@@ -83,9 +83,9 @@ public class Vehicles_Owner extends javax.swing.JPanel {
 
         lblName.setText("Owner ID:");
 
-        txtName.addActionListener(new java.awt.event.ActionListener() {
+        txtOID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
+                txtOIDActionPerformed(evt);
             }
         });
 
@@ -196,7 +196,7 @@ public class Vehicles_Owner extends javax.swing.JPanel {
                                         .addComponent(lblTitle1)
                                         .addComponent(txtVehiID, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblTitle)
-                                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtOID, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtFName, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtLName, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtservDate, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -237,7 +237,7 @@ public class Vehicles_Owner extends javax.swing.JPanel {
                     .addComponent(lblTitle))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtOID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -281,7 +281,7 @@ public class Vehicles_Owner extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        String name = txtName.getText().trim();
+        String name = txtOID.getText().trim();
         
         if (name.isEmpty()) {
             JOptionPane.showMessageDialog(this,
@@ -291,9 +291,8 @@ public class Vehicles_Owner extends javax.swing.JPanel {
             return;
         }
         
-        Owner supplier = supplierDirectory.addSupplier();
-        supplier.setSupplyName(name);
-        supplier.setLogoImage(logoImage);
+        Owner owner = supplierDirectory.addOwner();
+        owner.setOwnerName(name);
         
         JOptionPane.showMessageDialog(this,
             "Supplier successfully added",
@@ -310,42 +309,52 @@ public class Vehicles_Owner extends javax.swing.JPanel {
 
     private void sevicComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sevicComboActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_sevicComboActionPerformed
 
     private void sevicComboComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_sevicComboComponentShown
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_sevicComboComponentShown
 
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+    private void txtOIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
+        System.out.println(txtOID.getText());
+    }//GEN-LAST:event_txtOIDActionPerformed
 
     private void txtFNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFNameActionPerformed
         // TODO add your handling code here:
+        System.out.println(txtFName.getText());
     }//GEN-LAST:event_txtFNameActionPerformed
 
     private void txtLNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLNameActionPerformed
         // TODO add your handling code here:
+        System.out.println(txtLName.getText());
     }//GEN-LAST:event_txtLNameActionPerformed
 
     private void txtservDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtservDateActionPerformed
         // TODO add your handling code here:
+        System.out.println(txtservDate.getText());
     }//GEN-LAST:event_txtservDateActionPerformed
 
     private void txtVehiIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtVehiIDActionPerformed
         // TODO add your handling code here:
+        System.out.println(txtVehiID.getText());
     }//GEN-LAST:event_txtVehiIDActionPerformed
 
     private void txtMakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMakeActionPerformed
         // TODO add your handling code here:
+        System.out.println(txtMake.getText());
     }//GEN-LAST:event_txtMakeActionPerformed
 
     private void txtModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModelActionPerformed
         // TODO add your handling code here:
+        System.out.println(txtModel.getText());
     }//GEN-LAST:event_txtModelActionPerformed
 
     private void txtReNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReNumActionPerformed
         // TODO add your handling code here:
+        System.out.println(txtReNum.getText());
     }//GEN-LAST:event_txtReNumActionPerformed
 
       
@@ -378,7 +387,7 @@ public class Vehicles_Owner extends javax.swing.JPanel {
     private javax.swing.JTextField txtLName;
     private javax.swing.JTextField txtMake;
     private javax.swing.JTextField txtModel;
-    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtOID;
     private javax.swing.JTextField txtReNum;
     private javax.swing.JTextField txtVehiID;
     private javax.swing.JTextField txtservDate;

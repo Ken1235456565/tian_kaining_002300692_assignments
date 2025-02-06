@@ -32,6 +32,8 @@ public class MainJFrame extends javax.swing.JFrame {
         ownerDirectory = new OwnerDirectory(); // 初始化车主目录
         mainWorkArea = new javax.swing.JPanel();
         mainWorkArea.setLayout(new CardLayout());
+        this.serviceCatalog = new ServiceCatalog();
+        this.vehicleCatalog = new VehicleCatalog();
         
         // basic setings
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -41,6 +43,13 @@ public class MainJFrame extends javax.swing.JFrame {
 
         populateDemoData(); // 预填充测试数据
         setNavigationPage(); // 设置导航页面
+        
+        //直接跳转到 NavigationPage
+        NavigationPage navigationPage = new NavigationPage(mainWorkArea, ownerDirectory);
+        mainWorkArea.add("NavigationPage", navigationPage);
+
+        setContentPane(mainWorkArea); //让 `mainWorkArea` 成为默认面板
+        ((CardLayout) mainWorkArea.getLayout()).show(mainWorkArea, "NavigationPage"); //显示 NavigationPage
     }
 
     /**

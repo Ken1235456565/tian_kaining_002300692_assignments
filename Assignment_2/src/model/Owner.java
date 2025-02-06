@@ -72,6 +72,24 @@ public class Owner {
         this.vehicleCatalog = new VehicleCatalog(); // 初始化 VehicleCatalog
     }
     
+    public String getOwnerName() {
+        return ownerFirstName + " " + ownerLastName;
+    }
+    
+    //setOwnerName() 方法（不允许为空）
+    public void setOwnerName(String fullName) {
+        if (fullName != null && fullName.contains(" ")) {
+            String[] parts = fullName.split(" ", 2); // 以第一个空格拆分
+            this.ownerFirstName = parts[0];
+            this.ownerLastName = parts[1];
+        } else {
+            this.ownerFirstName = fullName; // 只有一个名字
+            this.ownerLastName = ""; // 姓氏为空
+        }
+    }
+    
+    
+    
     @Override
     public String toString() {
         return ownerFirstName + " " + ownerLastName;
