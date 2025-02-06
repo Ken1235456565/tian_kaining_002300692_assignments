@@ -43,15 +43,32 @@ public class ManageVehicles extends javax.swing.JPanel {
     
     public void refreshTable() {
         
-        DefaultTableModel model = (DefaultTableModel)tblVehicles.getModel();
-        model.setRowCount(0);
+    DefaultTableModel model = (DefaultTableModel) tblVehicles.getModel();
+    model.setRowCount(0);
+    for (Owner owner : ownerDirectory.getOwnerList()) {
+        // 修改: 获取车辆目录中的所有车辆
+        ArrayList<Vehicle> vehicles = owner.getVehicleCatalog().getVehicleCatalog();
         
-        for(Owner s : ownerDirectory.getOwnerList()) {
-            Object row[] = new Object[1];
-            row[0] = s;
-           // row[1] = s.getProductCatalog().getProductCount() == 0 ? "None" : s.getProductCatalog().getProductCount();
-            model.addRow(row);
+        // 遍历该车主的所有车辆
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle != null) {
+                Object[] row = new Object[4];
+                row[0] = owner.getOwnerID();
+                row[1] = vehicle.getVehicleID();
+                // 检查是否有服务记录
+                if (!vehicle.getServicesOpted().isEmpty()) {
+                    Service service = vehicle.getServicesOpted().get(0);
+                    row[2] = service.getServiceType();
+                    row[3] = service.getCost();
+                } else {
+                    row[2] = "No Service";
+                    row[3] = 0.0;
+                }
+                model.addRow(row);
+            }
         }
+    }
+    model.fireTableDataChanged();
     }
   
 

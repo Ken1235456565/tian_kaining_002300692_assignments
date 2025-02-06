@@ -29,5 +29,6 @@ public class ServiceCatalog {
     public ArrayList<Service> getServiceList() {
         return serviceList;
     }
+    
 }
 

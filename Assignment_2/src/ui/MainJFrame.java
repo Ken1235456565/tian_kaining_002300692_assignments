@@ -179,9 +179,9 @@ public class MainJFrame extends javax.swing.JFrame {
     ownerDirectory.addOwner(owner5);
 
     // 创建 Service（服务）
-    Service service1 = new Service(101, "Oil Change", 50.0, "Mike", 30);
-    Service service2 = new Service(102, "Car Wash", 20.0, "Sara", 15);
-    Service service3 = new Service(103, "Puncture", 80.0, "Tom", 60);
+    Service service1 = new Service("101", "Oil Change", 50.0, "Mike","Sara", 30);
+    Service service2 = new Service("102", "Car Wash", 20.0, "Sara","Mike", 15);
+    Service service3 = new Service("103", "Puncture", 80.0, "Tom","Mike", 60);
 
     // 添加 Service 到 ServiceCatalog
     serviceCatalog.addService(service1);

@@ -17,6 +17,8 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import model.Service;
+import model.Vehicle;
 import ui.MainJFrame;
 
 
@@ -271,25 +273,60 @@ public class Vehicles_Owner extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        String name = txtOID.getText().trim();
-        
-        if (name.isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                "Please enter a supplier name",
-                "Warning",
-                JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        
-        Owner owner = supplierDirectory.addOwner();
-        owner.setOwnerName(name);
-        
+        // 获取所有输入字段
+    String ownerId = txtOID.getText().trim();
+    String firstName = txtFName.getText().trim();
+    String lastName = txtLName.getText().trim();
+    String serviceDate = txtservDate.getText().trim();
+    String vehicleId = txtVehiID.getText().trim();
+    String make = txtMake.getText().trim();
+    String model = txtModel.getText().trim();
+    String regNumber = txtReNum.getText().trim();
+    String selectedService = (String) sevicCombo.getSelectedItem();
+
+    // 验证必填字段
+    if (ownerId.isEmpty() || firstName.isEmpty() || lastName.isEmpty() || 
+        vehicleId.isEmpty() || make.isEmpty() || model.isEmpty()) {
         JOptionPane.showMessageDialog(this,
-            "Supplier successfully added",
+            "Please fill in all required fields",
+            "Warning",
+            JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    try {
+        // 创建并设置 Owner
+        Owner owner = supplierDirectory.addOwner();
+        owner.setOwnerID(Integer.parseInt(ownerId));
+        owner.setOwnerFirstName(firstName);
+        owner.setOwnerLastName(lastName);
+
+        // 创建并设置 Vehicle
+        Vehicle vehicle = new Vehicle(make, model, 0, regNumber);  // 年份可以后续添加
+        vehicle.setVehicleID(vehicleId);
+        
+        // 添加车辆到 Owner
+        owner.getVehicleCatalog().addVehicle(vehicle);
+
+        // 如果选择了服务，创建服务记录
+        if (selectedService != null && !selectedService.trim().isEmpty() && !"  ".equals(selectedService)) {
+            Service service = new Service(); // 需要设置适当的服务参数
+            vehicle.addService(service);
+        }
+
+        JOptionPane.showMessageDialog(this,
+            "Owner and vehicle successfully added",
             "Success",
             JOptionPane.INFORMATION_MESSAGE);
             
+        clearFields(); // 清空所有输入字段
         backAction();
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this,
+            "Invalid number format in ID field",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -373,9 +410,23 @@ public class Vehicles_Owner extends javax.swing.JPanel {
 
       
     private void backAction() {
+        // 清理当前面板
+        workArea.remove(this);
         CardLayout layout = (CardLayout) workArea.getLayout();
-        layout.show(workArea, "NavigationPage"); //直接切换到 NavigationPage
+        layout.previous(workArea);
     }
+    
+    private void clearFields() {
+    txtOID.setText("");
+    txtFName.setText("");
+    txtLName.setText("");
+    txtservDate.setText("");
+    txtVehiID.setText("");
+    txtMake.setText("");
+    txtModel.setText("");
+    txtReNum.setText("");
+    sevicCombo.setSelectedIndex(0);
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;

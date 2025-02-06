@@ -58,7 +58,7 @@
                               <Component id="txtCost" max="32767" attributes="1"/>
                               <Component id="txtServType" max="32767" attributes="1"/>
                               <Component id="txtName2" max="32767" attributes="1"/>
-                              <Component id="txtName5" max="32767" attributes="1"/>
+                              <Component id="txtSD" max="32767" attributes="1"/>
                           </Group>
                       </Group>
                   </Group>
@@ -103,7 +103,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblName5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtName5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtSD" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="btnCreateService" min="-2" max="-2" attributes="0"/>
@@ -189,9 +189,9 @@
         <Property name="text" type="java.lang.String" value="Service Duration:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtName5">
+    <Component class="javax.swing.JTextField" name="txtSD">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtName5ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSDActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

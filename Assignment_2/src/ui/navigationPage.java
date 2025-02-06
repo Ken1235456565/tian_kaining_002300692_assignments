@@ -6,14 +6,11 @@
 package ui;
 
 import java.awt.CardLayout;
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Owner;
 import model.OwnerDirectory;
 import ui.service.Services;
+import model.ServiceCatalog;
 import ui.service.ManageVehicles;
 import ui.service.ViewVehiclesDetails;
 import ui.user.Vehicles_Owner;
@@ -27,12 +24,14 @@ public class NavigationPage extends javax.swing.JPanel {
 
     private JPanel mainWorkArea;
     private OwnerDirectory ownerDirectory;
+    private ServiceCatalog serviceCatalog;
    
 
     public NavigationPage(JPanel mainWorkArea, OwnerDirectory ownerDirectory) {
         initComponents(); // 仅初始化 UI
         this.mainWorkArea = mainWorkArea;
         this.ownerDirectory = ownerDirectory;
+        this.serviceCatalog = serviceCatalog;
     }
 
     /**
@@ -108,23 +107,26 @@ public class NavigationPage extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnServicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServicesActionPerformed
-        Services panel = new Services(mainWorkArea, ownerDirectory);
-        mainWorkArea.add("ManageServicesPanel", panel);
-        ((CardLayout) mainWorkArea.getLayout()).next(mainWorkArea);
+        Services panel = new Services(mainWorkArea, ownerDirectory,serviceCatalog);
+        mainWorkArea.add(panel, "Services");
+        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        layout.show(mainWorkArea, "Services");
     }//GEN-LAST:event_btnServicesActionPerformed
 
     private void btnVehicle_OwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehicle_OwnerActionPerformed
         // TODO add your handling code here:
         Vehicles_Owner panel = new Vehicles_Owner(mainWorkArea, ownerDirectory);
-        mainWorkArea.add("ManageOwnersPanel", panel);
-        ((CardLayout) mainWorkArea.getLayout()).next(mainWorkArea);
+        mainWorkArea.add(panel, "VehiclesOwner");
+        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        layout.show(mainWorkArea, "VehiclesOwner");
     }//GEN-LAST:event_btnVehicle_OwnerActionPerformed
 
     private void btnManageVehiclesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageVehiclesActionPerformed
         // TODO add your handling code here:
         ManageVehicles panel = new ManageVehicles(mainWorkArea, ownerDirectory);
-        mainWorkArea.add("ManageVehiclesPanel", panel);
-        ((CardLayout) mainWorkArea.getLayout()).next(mainWorkArea);
+        mainWorkArea.add(panel, "ManageVehicles");
+        CardLayout layout = (CardLayout) mainWorkArea.getLayout();
+        layout.show(mainWorkArea, "ManageVehicles");
     }//GEN-LAST:event_btnManageVehiclesActionPerformed
 
 

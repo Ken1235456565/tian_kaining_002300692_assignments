@@ -14,19 +14,12 @@ package ui.service;
 import model.Owner;
 import model.OwnerDirectory;
 import java.awt.CardLayout;
-import java.awt.Component;
-import java.awt.Image;
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+import model.Service;
+import model.ServiceCatalog;
 
 
 /**
@@ -37,13 +30,14 @@ public class Services extends javax.swing.JPanel {
 
     private JPanel workArea;
     private OwnerDirectory ownerDirectory;
-    ImageIcon logoImage;
+    private ServiceCatalog serviceCatalog;
     
     /** Creates new form AddSupplier */
-    public Services(JPanel workArea, OwnerDirectory supplierDirectory) {
+    public Services(JPanel workArea, OwnerDirectory ownerDirectory, ServiceCatalog serviceCatalog) {
         initComponents();
         this.workArea = workArea;
         this.ownerDirectory = ownerDirectory;
+        this.serviceCatalog = serviceCatalog;
     
     }
 
@@ -70,7 +64,7 @@ public class Services extends javax.swing.JPanel {
         lblName2 = new javax.swing.JLabel();
         txtName2 = new javax.swing.JTextField();
         lblName5 = new javax.swing.JLabel();
-        txtName5 = new javax.swing.JTextField();
+        txtSD = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -132,9 +126,9 @@ public class Services extends javax.swing.JPanel {
 
         lblName5.setText("Service Duration:");
 
-        txtName5.addActionListener(new java.awt.event.ActionListener() {
+        txtSD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtName5ActionPerformed(evt);
+                txtSDActionPerformed(evt);
             }
         });
 
@@ -173,7 +167,7 @@ public class Services extends javax.swing.JPanel {
                                 .addComponent(txtCost)
                                 .addComponent(txtServType)
                                 .addComponent(txtName2)
-                                .addComponent(txtName5)))))
+                                .addComponent(txtSD)))))
                 .addContainerGap(398, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -206,7 +200,7 @@ public class Services extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblName5)
-                    .addComponent(txtName5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(btnCreateService)
                 .addContainerGap(302, Short.MAX_VALUE))
@@ -220,25 +214,68 @@ public class Services extends javax.swing.JPanel {
 
     private void btnCreateServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateServiceActionPerformed
         // TODO add your handling code here:
-        String name = txtServID.getText().trim();
+        // Get input values
+        String serviceID = txtServID.getText().trim();
+        String serviceType = txtServType.getText().trim();
+        String costText = txtCost.getText().trim();
+        String mechanic1 = txtName1.getText().trim();
+        String mechanic2 = txtName2.getText().trim();
+        String durationText = txtSD.getText().trim();
 
-        if (name.isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                "Please enter a supplier name",
-                "Warning",
+        // Validate inputs
+        if (serviceID.isEmpty() || serviceType.isEmpty() || costText.isEmpty() || mechanic1.isEmpty() || mechanic2.isEmpty() || durationText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                "All fields are required!", 
+                "Warning", 
                 JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        Owner owner = ownerDirectory.addOwner();
-        owner.setOwnerName(name);
+        // Convert numeric values
+        double cost;
+        int duration;
+        try {
+            cost = Double.parseDouble(costText);
+            duration = Integer.parseInt(durationText);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, 
+                "Please enter valid numeric values for cost and duration", 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-        JOptionPane.showMessageDialog(this,
-            "Supplier successfully added",
-            "Success",
-            JOptionPane.INFORMATION_MESSAGE);
+        // Ensure serviceCatalog is initialized
+    if (serviceCatalog == null) {
+        serviceCatalog = new ServiceCatalog();
+    }
 
-        backAction();
+    // Create Service object using the constructor
+    Service newService = new Service(
+        serviceID,
+        serviceType,
+        cost,
+        mechanic1,
+        mechanic2,
+        duration
+    );
+
+    // Add to catalog
+    serviceCatalog.addService(newService);
+
+    // Show success message
+    JOptionPane.showMessageDialog(this, 
+        "Service successfully added!", 
+        "Success", 
+        JOptionPane.INFORMATION_MESSAGE);
+
+    // Reset form fields
+    txtServID.setText("");
+    txtServType.setText("");
+    txtCost.setText("");
+    txtName1.setText("");
+    txtName2.setText("");
+    txtSD.setText("");
     }//GEN-LAST:event_btnCreateServiceActionPerformed
 
     private void txtServIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtServIDActionPerformed
@@ -299,25 +336,21 @@ public class Services extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtName2ActionPerformed
 
-    private void txtName5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName5ActionPerformed
+    private void txtSDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSDActionPerformed
         // TODO add your handling code here:
-        String registrationNumber = txtName5.getText().trim();
+        String registrationNumber = txtSD.getText().trim();
         if (registrationNumber.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Registration Number cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             System.out.println("Vehicle Registration Number set to: " + registrationNumber);
         }
-    }//GEN-LAST:event_txtName5ActionPerformed
+    }//GEN-LAST:event_txtSDActionPerformed
 
       
-      private void backAction() {
-        workArea.remove(this);
-        Component[] componentArray = workArea.getComponents();
-        Component component = componentArray[componentArray.length - 1];
-        ManageVehicles manageSuppliersJPanel = (ManageVehicles) component;
-        manageSuppliersJPanel.refreshTable();
-        CardLayout layout = (CardLayout) workArea.getLayout();
-        layout.previous(workArea);
+    private void backAction() {
+    workArea.remove(this);  // 先移除当前面板
+    CardLayout layout = (CardLayout) workArea.getLayout();
+    layout.previous(workArea);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -333,7 +366,7 @@ public class Services extends javax.swing.JPanel {
     private javax.swing.JTextField txtCost;
     private javax.swing.JTextField txtName1;
     private javax.swing.JTextField txtName2;
-    private javax.swing.JTextField txtName5;
+    private javax.swing.JTextField txtSD;
     private javax.swing.JTextField txtServID;
     private javax.swing.JTextField txtServType;
     // End of variables declaration//GEN-END:variables

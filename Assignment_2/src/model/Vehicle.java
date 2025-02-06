@@ -45,6 +45,10 @@ public class Vehicle {
         return vehicleID;
     }
 
+    public void setVehicleID(String vehicleID) {
+        this.vehicleID = vehicleID;
+    }
+
     public String getMake() {
         return make;
     }
@@ -79,6 +83,10 @@ public class Vehicle {
 
     public ArrayList<Service> getServicesOpted() {
         return servicesOpted;
+    }
+    
+    public void setServicesOpted(ArrayList<Service> servicesOpted) {
+        this.servicesOpted = servicesOpted;
     }
 
     public void addService(Service service) {

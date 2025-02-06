@@ -47,13 +47,25 @@ public class VehicleCatalog {
     }
 
     // 通过 ID 搜索车辆
-    public Vehicle searchVehicle(String id) {
-        for (Vehicle v : vehicleCatalog) {
-            if (v.getVehicleID() == id) { // getId() 改为 getVehicleID()
-                return v;
-            }
+    public ArrayList<Vehicle> searchVehicles(String searchInput) {
+    ArrayList<Vehicle> results = new ArrayList<>();
+    if (searchInput == null || searchInput.trim().isEmpty()) {
+        return results;
+    }
+    
+    searchInput = searchInput.toLowerCase().trim();
+    
+    for (Vehicle v : vehicleCatalog) {
+        // 检查 vehicleID 或 make+model 是否匹配
+        if (v.getVehicleID().toLowerCase().contains(searchInput) ||
+            v.getMake().toLowerCase().contains(searchInput) ||
+            v.getModel().toLowerCase().contains(searchInput) ||
+            (v.getMake() + " " + v.getModel()).toLowerCase().contains(searchInput) ||
+            (v.getModel() + " " + v.getMake()).toLowerCase().contains(searchInput)) {
+            results.add(v);
         }
-        return null;
+    }
+    return results;
     }
 
     // 通过 Name (Make + Model) 搜索车辆
