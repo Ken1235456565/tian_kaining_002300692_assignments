@@ -56,29 +56,32 @@ public class Services extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblName = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
+        lblServID = new javax.swing.JLabel();
+        txtServID = new javax.swing.JTextField();
         lblTitle = new javax.swing.JLabel();
-        btnAddSupplier = new javax.swing.JButton();
+        btnCreateService = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
-        lblDescription = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        lblLogo = new javax.swing.JLabel();
-        imgLogo = new javax.swing.JLabel();
-        btnAttach = new javax.swing.JButton();
-        btnRemove = new javax.swing.JButton();
+        lblServType = new javax.swing.JLabel();
+        txtServType = new javax.swing.JTextField();
+        txtCost = new javax.swing.JTextField();
+        lblCost = new javax.swing.JLabel();
+        txtName1 = new javax.swing.JTextField();
+        lblName1 = new javax.swing.JLabel();
+        lblName2 = new javax.swing.JLabel();
+        txtName2 = new javax.swing.JTextField();
+        lblName5 = new javax.swing.JLabel();
+        txtName5 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        lblName.setText("Name:");
+        lblServID.setText("Service lD:");
 
-        lblTitle.setText("New Supplier Information:");
+        lblTitle.setText("Services");
 
-        btnAddSupplier.setText("Add");
-        btnAddSupplier.addActionListener(new java.awt.event.ActionListener() {
+        btnCreateService.setText("Create Service");
+        btnCreateService.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddSupplierActionPerformed(evt);
+                btnCreateServiceActionPerformed(evt);
             }
         });
 
@@ -89,31 +92,15 @@ public class Services extends javax.swing.JPanel {
             }
         });
 
-        lblDescription.setText("Description:");
+        lblServType.setText("Service Type:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        lblCost.setText("Cost:");
 
-        lblLogo.setText("Logo:");
+        lblName1.setText("Mechanic's Name1:");
 
-        imgLogo.setText("<No Image>");
-        imgLogo.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        imgLogo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        lblName2.setText("Mechanic's Name2:");
 
-        btnAttach.setText("Attach");
-        btnAttach.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAttachActionPerformed(evt);
-            }
-        });
-
-        btnRemove.setText("Remove");
-        btnRemove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoveActionPerformed(evt);
-            }
-        });
+        lblName5.setText("Service Duration:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -122,34 +109,36 @@ public class Services extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblDescription)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(26, 26, 26)
-                                    .addComponent(backButton))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(84, 84, 84)
-                                    .addComponent(lblName)))
-                            .addComponent(lblLogo))
-                        .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtName)
-                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTitle)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(imgLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(50, 50, 50)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(btnRemove, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btnAttach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(btnAddSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(423, Short.MAX_VALUE))
+                                .addGap(26, 26, 26)
+                                .addComponent(backButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(84, 84, 84)
+                                .addComponent(lblServID)))
+                        .addGap(108, 108, 108)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtServID, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTitle))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblServType)
+                            .addComponent(lblCost)
+                            .addComponent(lblName1)
+                            .addComponent(lblName2)
+                            .addComponent(lblName5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCreateService, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtName1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                                .addComponent(txtCost)
+                                .addComponent(txtServType)
+                                .addComponent(txtName2)
+                                .addComponent(txtName5)))))
+                .addContainerGap(398, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,30 +149,43 @@ public class Services extends javax.swing.JPanel {
                     .addComponent(lblTitle))
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDescription)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAttach)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRemove))
-                    .addComponent(lblLogo)
-                    .addComponent(imgLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62)
-                .addComponent(btnAddSupplier)
-                .addContainerGap(152, Short.MAX_VALUE))
+                    .addComponent(txtServID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblServID))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtServType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblServType))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCost))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblName1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblName2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblName5)
+                    .addComponent(txtName5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(btnCreateService)
+                .addContainerGap(302, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSupplierActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        String name = txtName.getText().trim();
-        
+       backAction();
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void btnCreateServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateServiceActionPerformed
+        // TODO add your handling code here:
+        String name = txtServID.getText().trim();
+
         if (name.isEmpty()) {
             JOptionPane.showMessageDialog(this,
                 "Please enter a supplier name",
@@ -191,63 +193,18 @@ public class Services extends javax.swing.JPanel {
                 JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+
         Owner supplier = supplierDirectory.addSupplier();
         supplier.setSupplyName(name);
         supplier.setLogoImage(logoImage);
-        
+
         JOptionPane.showMessageDialog(this,
             "Supplier successfully added",
             "Success",
             JOptionPane.INFORMATION_MESSAGE);
-            
+
         backAction();
-    }//GEN-LAST:event_btnAddSupplierActionPerformed
-
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
-       backAction();
-    }//GEN-LAST:event_backButtonActionPerformed
-
-    private void btnAttachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttachActionPerformed
-        // TODO add your handling code here:
-        JFileChooser fileChooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-            "Image Files", "jpg", "jpeg", "png", "gif");
-        fileChooser.setFileFilter(filter);
-        
-        int result = fileChooser.showOpenDialog(this);
-        
-        if (result == JFileChooser.APPROVE_OPTION) {
-            try {
-                File selectedFile = fileChooser.getSelectedFile();
-                logoImage = new ImageIcon(selectedFile.getPath());
-                
-                Image image = logoImage.getImage();
-                Image resizedImage = image.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
-                logoImage = new ImageIcon(resizedImage);
-                
-                imgLogo.setIcon(logoImage);
-                imgLogo.setText("");
-                btnRemove.setEnabled(true);
-                
-            } catch (Exception ex) {
-                Logger.getLogger(Services.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, 
-                    "Error loading image", 
-                    "Error", 
-                    JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }//GEN-LAST:event_btnAttachActionPerformed
-
-    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        // TODO add your handling code here:
-        logoImage = null;
-        imgLogo.setIcon(null);
-        imgLogo.setText("<No Image>");
-        btnRemove.setEnabled(false);
-    }//GEN-LAST:event_btnRemoveActionPerformed
+    }//GEN-LAST:event_btnCreateServiceActionPerformed
 
       
       private void backAction() {
@@ -262,17 +219,20 @@ public class Services extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
-    private javax.swing.JButton btnAddSupplier;
-    private javax.swing.JButton btnAttach;
-    private javax.swing.JButton btnRemove;
-    private javax.swing.JLabel imgLogo;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JLabel lblDescription;
-    private javax.swing.JLabel lblLogo;
-    private javax.swing.JLabel lblName;
+    private javax.swing.JButton btnCreateService;
+    private javax.swing.JLabel lblCost;
+    private javax.swing.JLabel lblName1;
+    private javax.swing.JLabel lblName2;
+    private javax.swing.JLabel lblName5;
+    private javax.swing.JLabel lblServID;
+    private javax.swing.JLabel lblServType;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtCost;
+    private javax.swing.JTextField txtName1;
+    private javax.swing.JTextField txtName2;
+    private javax.swing.JTextField txtName5;
+    private javax.swing.JTextField txtServID;
+    private javax.swing.JTextField txtServType;
     // End of variables declaration//GEN-END:variables
 
 }

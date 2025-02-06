@@ -22,48 +22,65 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblDescription" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                  <Component id="backButton" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-                                  <Component id="lblName" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="lblLogo" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="backButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtName" alignment="0" max="32767" attributes="1"/>
-                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblTitle" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="imgLogo" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="btnRemove" max="32767" attributes="0"/>
-                                          <Component id="btnAttach" max="32767" attributes="0"/>
-                                      </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblVehiID" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblTitle1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtVehiID" alignment="0" min="-2" pref="211" max="-2" attributes="1"/>
+                                      <Component id="lblTitle" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtName" alignment="0" min="-2" pref="211" max="-2" attributes="1"/>
+                                      <Component id="txtFName" alignment="0" min="-2" pref="211" max="-2" attributes="1"/>
+                                      <Component id="txtLName" alignment="0" min="-2" pref="211" max="-2" attributes="1"/>
+                                      <Component id="txtservDate" alignment="0" min="-2" pref="211" max="-2" attributes="1"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblMake" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="txtMake" min="-2" pref="211" max="-2" attributes="1"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblModel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="89" max="32767" attributes="0"/>
+                                  <Component id="txtModel" min="-2" pref="211" max="-2" attributes="1"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblReNum" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblservOpt" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="btnAdd" min="-2" pref="115" max="-2" attributes="0"/>
+                                      <Component id="txtReNum" pref="211" max="32767" attributes="1"/>
+                                      <Component id="sevicCombo" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lblServDate" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="432" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
-                      <Component id="btnAddSupplier" min="-2" pref="115" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lblFName" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblName" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblLName" alignment="1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="432" pref="432" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="423" max="32767" attributes="0"/>
+              <EmptySpace pref="191" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -75,29 +92,56 @@
                   <Component id="backButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblTitle" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblDescription" min="-2" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtFName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblFName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="btnAttach" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnRemove" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="lblLogo" min="-2" max="-2" attributes="0"/>
-                  <Component id="imgLogo" min="-2" pref="150" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtLName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblLName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-              <Component id="btnAddSupplier" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="152" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtservDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblServDate" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Component id="lblTitle1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtVehiID" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblVehiID" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtMake" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMake" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtModel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblModel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtReNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblReNum" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="sevicCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblservOpt" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <Component id="btnAdd" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="192" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -105,22 +149,22 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lblName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Name:"/>
+        <Property name="text" type="java.lang.String" value="Owner ID:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtName">
     </Component>
     <Component class="javax.swing.JLabel" name="lblTitle">
       <Properties>
-        <Property name="text" type="java.lang.String" value="New Supplier Information:"/>
+        <Property name="text" type="java.lang.String" value="Owner Details"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAddSupplier">
+    <Component class="javax.swing.JButton" name="btnAdd">
       <Properties>
         <Property name="text" type="java.lang.String" value="Add"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddSupplierActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="backButton">
@@ -131,57 +175,83 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblDescription">
+    <Component class="javax.swing.JLabel" name="lblFName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Description:"/>
+        <Property name="text" type="java.lang.String" value="NameOwner First Name"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
-          <Properties>
-            <Property name="columns" type="int" value="20"/>
-            <Property name="rows" type="int" value="5"/>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
-    <Component class="javax.swing.JLabel" name="lblLogo">
+    <Component class="javax.swing.JTextField" name="txtFName">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtservDate">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtLName">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblLName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Logo:"/>
+        <Property name="text" type="java.lang.String" value="Owner Last Name:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="imgLogo">
+    <Component class="javax.swing.JLabel" name="lblServDate">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;No Image&gt;"/>
-        <Property name="verticalAlignment" type="int" value="1"/>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-            <EmptyBorder/>
-          </Border>
+        <Property name="text" type="java.lang.String" value="Service Date:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblTitle1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Vehicle Details"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtVehiID">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMake">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Make:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtMake">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtModel">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblModel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Model:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblReNum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Registration Number:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtReNum">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="sevicCombo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="  "/>
+            <StringItem index="1" value="Oil Change"/>
+            <StringItem index="2" value="Car Wash"/>
+            <StringItem index="3" value="Puncture"/>
+          </StringArray>
         </Property>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnAttach">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Attach"/>
-      </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAttachActionPerformed"/>
+        <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="sevicComboComponentShown"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sevicComboActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="btnRemove">
+    <Component class="javax.swing.JLabel" name="lblservOpt">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Remove"/>
+        <Property name="text" type="java.lang.String" value="Service Opted:"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoveActionPerformed"/>
-      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblVehiID">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Vehicle ID:"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
