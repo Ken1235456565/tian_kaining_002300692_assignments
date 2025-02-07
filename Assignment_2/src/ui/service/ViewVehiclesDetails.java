@@ -8,8 +8,13 @@ import model.Vehicle;
 import model.Owner;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import model.Service;
+import model.ServiceCatalog;
 
 /**
  *
@@ -20,20 +25,17 @@ public class ViewVehiclesDetails extends javax.swing.JPanel {
     JPanel workArea;
     Owner owner;
     Vehicle vehicles;
+    private ServiceCatalog serviceCatalog;
     
     /**
      * Creates new form ViewSupplier
      */
-    public ViewVehiclesDetails(JPanel workArea, Owner owner) {
+    public ViewVehiclesDetails(JPanel workArea, Owner owner, ServiceCatalog serviceCatalog) {
         initComponents();
         this.workArea = workArea;
         this.owner = owner;
-        this.vehicles = vehicles;
-        
-        // 确保获取正确的 vehicle 对象
-        if(owner != null && !owner.getVehicleCatalog().getVehicleCatalog().isEmpty()) {
-            this.vehicles = owner.getVehicleCatalog().getVehicleCatalog().get(0);
-        }
+        this.vehicles = owner.getVehicle();
+        this.serviceCatalog = serviceCatalog;
    
         populateFields();
         
@@ -54,17 +56,98 @@ public class ViewVehiclesDetails extends javax.swing.JPanel {
         txtReNum.setText(vehicles.getRegistrationNumber());
         txtReNum1.setText(vehicles.getServicesOpted().toString());
         
-        // 设置所有文本框为不可编辑
-        txtName.setEditable(false);
-        txtFName.setEditable(false);
-        txtLName.setEditable(false);
-        txtservDate.setEditable(false);
-        txtVehiID.setEditable(false);
-        txtMake.setEditable(false);
-        txtModel.setEditable(false);
-        txtReNum.setEditable(false);
-        txtReNum1.setEditable(false);
     }
+    
+    private boolean validateServices(String servicesText) {
+    // 如果是空的直接返回true
+    if (servicesText == null || servicesText.trim().isEmpty()) {
+        return true;
+    }
+    
+    // 移除所有空格
+    servicesText = servicesText.replaceAll("\\s+", "");
+    
+    // 检查格式是否正确 (应该都在[]中)
+    if (!servicesText.matches("(\\[[^\\]]+\\])+")) {
+        return false;
+    }
+    
+        // 分割并验证每个服务
+        String[] services = servicesText.split("\\]\\[");
+        for (String service : services) {
+            // 移除剩余的[]
+            service = service.replaceAll("[\\[\\]]", "");
+
+            // 检查服务是否存在
+            if (serviceCatalog.findServiceByName(service) == null) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void parseAndUpdateServices(String servicesText) {
+        // 清空现有服务
+        vehicles.getServicesOpted().clear();
+
+        if (servicesText != null && !servicesText.trim().isEmpty()) {
+            // 移除所有空格
+            servicesText = servicesText.replaceAll("\\s+", "");
+
+            // 分割并添加每个服务
+            String[] services = servicesText.split("\\]\\[");
+            for (String service : services) {
+                // 移除剩余的[]
+                service = service.replaceAll("[\\[\\]]", "");
+
+                // 添加服务
+                Service serviceObj = serviceCatalog.findServiceByName(service);
+                if (serviceObj != null) {
+                    vehicles.addService(serviceObj);
+                }
+            }
+        }
+    }
+    
+    private boolean validateAndFormatServices(String servicesText) {
+        if (servicesText == null || servicesText.trim().isEmpty()) {
+            return true;
+        }
+        // 移除所有空格、方括号和分隔符
+        String cleanText = servicesText.replaceAll("[\\[\\]\\s,]+", " ").trim();
+        // 分割成单独的服务名
+        String[] serviceNames = cleanText.split("\\s+");
+        StringBuilder formattedServices = new StringBuilder();
+        
+        for (String inputServiceName : serviceNames) {
+        // 使用不区分大小写的模糊匹配
+        Service matchedService = null;
+        for (Service service : serviceCatalog.getServiceList()) {
+            if (service.getServiceName().toLowerCase().contains(inputServiceName.toLowerCase())) {
+                matchedService = service;
+                break;
+            }
+        }
+        
+        if (matchedService != null) {
+            // 使用正确的大小写添加服务
+            formattedServices.append("[").append(matchedService.getServiceName()).append("]");
+        } else {
+            // 如果没有匹配服务，显示错误信息
+            JOptionPane.showMessageDialog(this,
+                "Service '" + inputServiceName + "' not found in service catalog.",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+    
+    // 更新文本框显示格式化后的内容
+    txtReNum1.setText(formattedServices.toString());
+    return true;
+}
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -96,6 +179,7 @@ public class ViewVehiclesDetails extends javax.swing.JPanel {
         txtservDate = new javax.swing.JTextField();
         lblReNum = new javax.swing.JLabel();
         txtReNum1 = new javax.swing.JTextField();
+        BtnSave = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -128,54 +212,66 @@ public class ViewVehiclesDetails extends javax.swing.JPanel {
 
         lblReNum.setText("Registration Number:");
 
+        BtnSave.setText("Save");
+        BtnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(backButton)
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(lblVehiID)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblTitle1)
-                                        .addComponent(txtVehiID, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblTitle)
-                                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtFName, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtLName, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtservDate, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(lblMake)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtMake, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(lblModel)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblReNum)
-                                        .addComponent(lblservOpt))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtReNum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtReNum1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblServDate)
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(backButton)
+                                .addGap(38, 38, 38)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(lblVehiID)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblTitle1)
+                                                .addComponent(txtVehiID, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(lblTitle)
+                                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtFName, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtLName, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtservDate, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(lblMake)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtMake, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(lblModel)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblReNum)
+                                                .addComponent(lblservOpt))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtReNum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtReNum1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lblServDate)
+                                        .addGap(262, 262, 262))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblFName)
+                                    .addComponent(lblName)
+                                    .addComponent(lblLName))
                                 .addGap(262, 262, 262))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblFName)
-                            .addComponent(lblName)
-                            .addComponent(lblLName))
-                        .addGap(262, 262, 262)))
+                        .addGap(292, 292, 292)
+                        .addComponent(BtnSave)))
                 .addContainerGap(318, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -223,7 +319,9 @@ public class ViewVehiclesDetails extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtReNum1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblservOpt))
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addComponent(BtnSave)
+                .addContainerGap(175, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -238,7 +336,79 @@ public class ViewVehiclesDetails extends javax.swing.JPanel {
         layout.previous(workArea);
     }//GEN-LAST:event_backButtonActionPerformed
 
+    private void BtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSaveActionPerformed
+        // TODO add your handling code here:
+        try {
+        // 验证并格式化服务
+        String servicesText = txtReNum1.getText().trim();
+        if (servicesText.isEmpty()) {
+            // 如果服务文本为空，清空服务列表
+            vehicles.getServicesOpted().clear();
+        } else {
+            // 使用更灵活的服务匹配方法
+            Set<Service> validServices = new HashSet<>();
+            String[] serviceParts = servicesText.replaceAll("[\\[\\]]", "").split("\\s*,\\s*");
+            
+            for (String serviceName : serviceParts) {
+                Service matchedService = findServiceByFuzzyMatch(serviceName);
+                if (matchedService == null) {
+                    JOptionPane.showMessageDialog(this,
+                        "Service '" + serviceName + "' not found in service catalog.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                validServices.add(matchedService);
+            }
+            
+            // 更新车辆服务
+            vehicles.setServicesOpted(validServices);
+        }
+        
+        // 更新 Owner 信息
+        owner.setOwnerFirstName(txtFName.getText().trim());
+        owner.setOwnerLastName(txtLName.getText().trim());
+        
+        // 更新 Vehicle 信息
+        vehicles.setVehicleID(txtVehiID.getText().trim());
+        vehicles.setMake(txtMake.getText().trim());
+        vehicles.setModel(txtModel.getText().trim());
+        vehicles.setRegistrationNumber(txtReNum.getText().trim());
+        
+        // 显示成功消息
+        JOptionPane.showMessageDialog(this,
+            "Information updated successfully",
+            "Success",
+            JOptionPane.INFORMATION_MESSAGE);
+            
+        // 刷新表格并返回
+        backButtonActionPerformed(null);
+        
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this,
+            "Error updating information: " + e.getMessage(),
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+// 辅助方法：模糊匹配服务
+private Service findServiceByFuzzyMatch(String serviceName) {
+    if (serviceName == null || serviceName.trim().isEmpty()) {
+        return null;
+    }
+    
+    for (Service service : serviceCatalog.getServiceList()) {
+        if (service.getServiceName().toLowerCase().contains(serviceName.toLowerCase().trim())) {
+            return service;
+        }
+    }
+    
+    return null;
+    }//GEN-LAST:event_BtnSaveActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnSave;
     private javax.swing.JButton backButton;
     private javax.swing.JLabel lblFName;
     private javax.swing.JLabel lblLName;

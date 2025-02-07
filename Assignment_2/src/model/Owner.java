@@ -15,7 +15,7 @@ public class Owner {
     private int ownerID;
     private String ownerFirstName;
     private String ownerLastName;
-    private VehicleCatalog vehicleCatalog;
+    private Vehicle vehicle;
     private LocalDate serviceDate;
 
     public int getOwnerID() {
@@ -31,6 +31,9 @@ public class Owner {
     }
 
     public void setOwnerFirstName(String ownerFirstName) {
+        if (ownerFirstName == null || ownerFirstName.trim().isEmpty()) {
+            throw new IllegalArgumentException("First name cannot be null or empty");
+        }
         this.ownerFirstName = ownerFirstName;
     }
 
@@ -39,15 +42,21 @@ public class Owner {
     }
 
     public void setOwnerLastName(String ownerLastName) {
+        if (ownerLastName == null || ownerLastName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Last name cannot be null or empty");
+        }
         this.ownerLastName = ownerLastName;
     }
 
-    public VehicleCatalog getVehicleCatalog() {
-        return vehicleCatalog;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
-    public void setVehicleCatalog(VehicleCatalog vehicleCatalog) {
-        this.vehicleCatalog = vehicleCatalog;
+    public void setVehicle(Vehicle vehicle) {
+        if (vehicle == null) {
+            throw new IllegalArgumentException("Vehicle cannot be null");
+        }
+        this.vehicle = vehicle;
     }
 
     public LocalDate getServiceDate() {
@@ -59,16 +68,15 @@ public class Owner {
     }
     
     public Owner() {
-        this.vehicleCatalog = new VehicleCatalog(); //each Owner have VehicleCatalog!
+        
     }
     
     //constructor
-    public Owner(int ownerID, String ownerFirstName, String ownerLastName, VehicleCatalog vehicleCatalog, LocalDate serviceDate) {
+    public Owner(int ownerID, String ownerFirstName, String ownerLastName, LocalDate serviceDate) {
         this.ownerID = ownerID;
         this.ownerFirstName = ownerFirstName;
         this.ownerLastName = ownerLastName;
         this.serviceDate = serviceDate;
-        this.vehicleCatalog = new VehicleCatalog(); // 初始化 VehicleCatalog
     }
     
     public String getOwnerName() {

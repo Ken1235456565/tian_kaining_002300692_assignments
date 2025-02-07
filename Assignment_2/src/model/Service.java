@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 
 public class Service {
     private String serviceID;        // 服务ID
@@ -79,7 +81,19 @@ public class Service {
         this.serviceDuration = serviceDuration;
     }
     
-    
+    // Ensure uniqueness based on serviceID
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Service service = (Service) obj;
+        return Objects.equals(serviceID, service.serviceID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(serviceID);
+    }
 
     @Override
     public String toString() {

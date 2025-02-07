@@ -313,7 +313,16 @@ public class Vehicles_Owner extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        // 获取所有输入字段
+        // 1. 验证所有输入不为空
+    if (isAnyFieldEmpty()) {
+        JOptionPane.showMessageDialog(this,
+            "All fields must be filled out",
+            "Validation Error",
+            JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // 2. 获取并验证输入值
     String ownerId = txtOID.getText().trim();
     String firstName = txtFName.getText().trim();
     String lastName = txtLName.getText().trim();
@@ -323,84 +332,65 @@ public class Vehicles_Owner extends javax.swing.JPanel {
     String model = txtModel.getText().trim();
     String regNumber = txtReNum.getText().trim();
     String selectedService = (String) sevicCombo.getSelectedItem();
-    
-    // **验证 Service Date**
-    LocalDate serviceDate = null;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // 指定日期格式
 
     try {
-        if (serviceDateText.isEmpty()) {
-            serviceDate = LocalDate.now(); // 如果用户未输入，默认当前日期
-        } else {
-            serviceDate = LocalDate.parse(serviceDateText);
-        }
-    } catch (DateTimeParseException e) {
-        JOptionPane.showMessageDialog(this,
-            "Invalid date format. Please use YYYY-MM-DD",
-            "Error",
-            JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-    
-    // 验证 Service ID 是否已存在
-    if (serviceCatalog.findServiceById(selectedService) != null) {
-        JOptionPane.showMessageDialog(this,
-            "Service ID already exists. Please enter a unique Service ID.",
-            "Error",
-            JOptionPane.ERROR_MESSAGE);
-        return; // 阻止继续执行
-    }
+        // 3. 验证日期格式
+        LocalDate serviceDate = LocalDate.parse(serviceDateText, 
+            DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-    // 验证 Vehicle ID 是否已存在
-    for (Owner owner : ownerDirectory.getOwnerList()) {
-        if (owner.getVehicleCatalog().findVehicle(vehicleId) != null) {
-            JOptionPane.showMessageDialog(this,
-                "Vehicle ID already exists. Please enter a unique Vehicle ID.",
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
-            return; // 阻止继续执行
-        }
-    }
+        // 4. 创建 Vehicle（在创建 Owner 之前）
+        Vehicle vehicle = new Vehicle(
+            vehicleId,
+            make,
+            model,
+            2024, // 当前年份
+            regNumber
+        );
 
-    try {
-        // 创建并设置 Owner
-        Owner owner = ownerDirectory.addOwner();
-        owner.setOwnerID(Integer.parseInt(ownerId));
-        owner.setOwnerFirstName(firstName);
-        owner.setOwnerLastName(lastName);
-        owner.setServiceDate(serviceDate);
+        // 5. 创建 Owner
+        Owner owner = new Owner(
+            Integer.parseInt(ownerId),
+            firstName,
+            lastName,
+            serviceDate
+        );
 
-        // 创建并设置 Vehicle
-        Vehicle vehicle = new Vehicle();
-        vehicle.setVehicleID(vehicleId);
-        vehicle.setMake(make);
-        vehicle.setModel(model);
-        vehicle.setRegistrationNumber(regNumber);
-
-        // 添加车辆到 Owner
-        owner.getVehicleCatalog().addVehicle(vehicle);
-
-        // 选择了服务，则添加
-        if (selectedService != null && !selectedService.trim().isEmpty() && !"  ".equals(selectedService)) {
+        // 6. 设置车辆到 Owner（在添加服务之前）
+        owner.setVehicle(vehicle);
+        
+        // 7. 添加选择的服务
+        if (selectedService != null && !selectedService.trim().isEmpty() && 
+            !"  ".equals(selectedService)) {
             Service service = serviceCatalog.findServiceByName(selectedService);
             if (service != null) {
                 vehicle.addService(service);
-                System.out.println("Service added to vehicle: " + service.getServiceName());
-            } else {
-                System.out.println("Service not found in ServiceCatalog: " + selectedService);
             }
         }
+
+        // 8. 添加 Owner 到目录
+        ownerDirectory.addOwner(owner);
 
         JOptionPane.showMessageDialog(this,
             "Owner and vehicle successfully added",
             "Success",
             JOptionPane.INFORMATION_MESSAGE);
-            
-        clearFields(); // 清空输入字段
+
+        clearFields();
         backAction();
+
+    } catch (DateTimeParseException e) {
+        JOptionPane.showMessageDialog(this,
+            "Invalid date format. Please use YYYY-MM-DD",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this,
-            "Invalid number format in ID field",
+            "Invalid owner ID format. Please enter a valid number",
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+    } catch (IllegalArgumentException e) {
+        JOptionPane.showMessageDialog(this,
+            e.getMessage(),
             "Error",
             JOptionPane.ERROR_MESSAGE);
     }
@@ -552,5 +542,14 @@ public class Vehicles_Owner extends javax.swing.JPanel {
     private javax.swing.JTextField txtservDate;
     // End of variables declaration//GEN-END:variables
 
-
+    private boolean isAnyFieldEmpty() {
+    return txtOID.getText().trim().isEmpty() ||
+           txtFName.getText().trim().isEmpty() ||
+           txtLName.getText().trim().isEmpty() ||
+           txtservDate.getText().trim().isEmpty() ||
+           txtVehiID.getText().trim().isEmpty() ||
+           txtMake.getText().trim().isEmpty() ||
+           txtModel.getText().trim().isEmpty() ||
+           txtReNum.getText().trim().isEmpty();
+}
 }

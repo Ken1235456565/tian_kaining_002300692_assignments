@@ -145,20 +145,6 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void populateDemoData() {
 
-    // 创建 Owner（车主）
-    Owner owner1 = new Owner(1, "John", "Doe", new VehicleCatalog(), LocalDate.of(2024, 2, 10));
-    Owner owner2 = new Owner(2, "Alice", "Smith", new VehicleCatalog(), LocalDate.of(2024, 3, 15));
-    Owner owner3 = new Owner(3, "Michael", "Johnson", new VehicleCatalog(), LocalDate.of(2024, 1, 20));
-    Owner owner4 = new Owner(4, "Emily", "Davis", new VehicleCatalog(), LocalDate.of(2024, 4, 5));
-    Owner owner5 = new Owner(5, "David", "Brown", new VehicleCatalog(), LocalDate.of(2024, 5, 12));
-
-    // 添加 Owner 到目录
-    ownerDirectory.addOwner(owner1);
-    ownerDirectory.addOwner(owner2);
-    ownerDirectory.addOwner(owner3);
-    ownerDirectory.addOwner(owner4);
-    ownerDirectory.addOwner(owner5);
-
     // 创建 Service（服务）
     Service service1 = new Service("101", "Oil Change", 50.0, "Mike","Sara", 30);
     Service service2 = new Service("102", "Car Wash", 20.0, "Sara","Mike", 15);
@@ -170,12 +156,32 @@ public class MainJFrame extends javax.swing.JFrame {
     serviceCatalog.addService(service3);
 
     // 创建 Vehicle（车辆）并绑定到 Owner 和 Service
-    Vehicle vehicle1 = new Vehicle("1", "Toyota", "Camry", 2020, "ABC123", owner1);
-    Vehicle vehicle2 = new Vehicle("2", "Honda", "Civic", 2019, "XYZ789", owner2);
-    Vehicle vehicle3 = new Vehicle("3", "Toyota", "Camry", 2021, "LMN456", owner3);
-    Vehicle vehicle4 = new Vehicle("4", "Ford", "Mustang", 2018, "PQR678", owner4);
-    Vehicle vehicle5 = new Vehicle("5", "BMW", "X5", 2022, "DEF345", owner5);
+    Vehicle vehicle1 = new Vehicle("1", "Toyota", "Camry", 2020, "ABC123");
+    Vehicle vehicle2 = new Vehicle("2", "Honda", "Civic", 2019, "XYZ789");
+    Vehicle vehicle3 = new Vehicle("3", "Toyota", "Camry", 2021, "LMN456");
+    Vehicle vehicle4 = new Vehicle("4", "Ford", "Mustang", 2018, "PQR678");
+    Vehicle vehicle5 = new Vehicle("5", "BMW", "X5", 2022, "DEF345");
+    
+    
+    // 创建 Owner（车主）
+    Owner owner1 = new Owner(1, "John", "Doe", LocalDate.of(2024, 2, 10));
+    owner1.setVehicle(vehicle1);
+    Owner owner2 = new Owner(2, "Alice", "Smith", LocalDate.of(2024, 3, 15));
+    owner2.setVehicle(vehicle2);
+    Owner owner3 = new Owner(3, "Michael", "Johnson", LocalDate.of(2024, 1, 20));
+    owner3.setVehicle(vehicle3);
+    Owner owner4 = new Owner(4, "Emily", "Davis", LocalDate.of(2024, 4, 5));
+    owner4.setVehicle(vehicle4);
+    Owner owner5 = new Owner(5, "David", "Brown", LocalDate.of(2024, 5, 12));
+    owner5.setVehicle(vehicle5);
 
+    // 添加 Owner 到目录
+    ownerDirectory.addOwner(owner1);
+    ownerDirectory.addOwner(owner2);
+    ownerDirectory.addOwner(owner3);
+    ownerDirectory.addOwner(owner4);
+    ownerDirectory.addOwner(owner5);
+    
     // 显式添加服务到车辆
     vehicle1.addService(service1);
     vehicle1.addService(service2);
@@ -183,12 +189,5 @@ public class MainJFrame extends javax.swing.JFrame {
     vehicle3.addService(service3);
     vehicle4.addService(service1);
     vehicle5.addService(service2);
-
-    // 添加 Vehicle 到 VehicleCatalog
-    owner1.getVehicleCatalog().addVehicle(vehicle1);
-    owner2.getVehicleCatalog().addVehicle(vehicle2);
-    owner3.getVehicleCatalog().addVehicle(vehicle3);
-    owner4.getVehicleCatalog().addVehicle(vehicle4);
-    owner5.getVehicleCatalog().addVehicle(vehicle5);
     }   
 }

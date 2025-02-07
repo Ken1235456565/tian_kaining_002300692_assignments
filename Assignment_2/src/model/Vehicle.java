@@ -6,7 +6,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  *
@@ -19,26 +21,27 @@ public class Vehicle {
     private String model; // 车型（如 Camry）
     private int year; // 生产年份
     private String registrationNumber; // 车牌号
-    private ArrayList<Service> servicesOpted; // 选择的服务
+    private Set<Service> servicesOpted;; // 选择的服务
 
     // 无参构造函数（自动分配 vehicleID）
     public Vehicle() {
-        this.vehicleID = vehicleID;
-        this.make = make;
-        this.model = model;
-        this.year = year;
-        this.registrationNumber = registrationNumber;
-        this.servicesOpted = new ArrayList<>();
+        this.servicesOpted = new HashSet<>();
     }
 
     // 带参数的构造函数
-    public Vehicle(String vehicleID, String make, String model, int year, String registrationNumber, Owner owner) {
+    public Vehicle(String vehicleID, String make, String model, int year, String registrationNumber) {
+        if (vehicleID == null || make == null || model == null || registrationNumber == null ||
+            vehicleID.trim().isEmpty() || make.trim().isEmpty() || 
+            model.trim().isEmpty() || registrationNumber.trim().isEmpty()) {
+            throw new IllegalArgumentException("All fields must be non-null and non-empty");
+        }
+        
         this.vehicleID = vehicleID;
         this.make = make;
         this.model = model;
         this.year = year;
         this.registrationNumber = registrationNumber;
-        this.servicesOpted = new ArrayList<>();
+        this.servicesOpted = new HashSet<>();
     }
 
     // Getters & Setters
@@ -82,38 +85,51 @@ public class Vehicle {
         this.registrationNumber = registrationNumber;
     }
 
-    public ArrayList<Service> getServicesOpted() {
+    // Get Services - No copy returned, so UI can modify directly
+    public Set<Service> getServicesOpted() {
         return servicesOpted;
     }
-    
-    public void setServicesOpted(ArrayList<Service> servicesOpted) {
-        this.servicesOpted = servicesOpted;
-    }
 
+    // Add a service (Ensures no duplicate services)
     public void addService(Service service) {
-        this.servicesOpted.add(service);
-    }
-
-    public void removeService(Service service) {
-        this.servicesOpted.remove(service);
-    }
-    
-    
-    public String toString() {
-    if (servicesOpted.isEmpty()) {
-        return "Vehicle: " + make + " " + model + " (" + year + ") - No services opted.";
-    }
-
-    StringBuilder result = new StringBuilder();
-    result.append("Vehicle: ").append(make).append(" ").append(model).append(" (").append(year).append(") - Services: ");
-
-    for (int i = 0; i < servicesOpted.size(); i++) {
-        result.append(servicesOpted.get(i).getServiceName()); //只显示服务名称
-        if (i < servicesOpted.size() - 1) {
-            result.append(", "); // 添加逗号分隔，最后一个不加
+        if (service == null) {
+            throw new IllegalArgumentException("Service cannot be null");
         }
+        this.servicesOpted.add(service); // HashSet prevents duplicates
     }
-    return result.toString();
-}
+
+    // Remove a service by ID (Ensures correct removal)
+    public boolean removeService(String serviceID) {
+        return servicesOpted.removeIf(service -> service.getServiceID().equals(serviceID));
+    }
+
+    // Update Services by replacing the entire list (Clears & Adds New)
+    public void setServicesOpted(Set<Service> newServices) {
+        this.servicesOpted.clear();
+        this.servicesOpted.addAll(newServices);
+    }
+
+    // Improved toString() to display services correctly
+    @Override
+    public String toString() {
+        if (servicesOpted.isEmpty()) {
+            return "Vehicle ID: " + vehicleID + " | " + make + " " + model + " (" + year + ") - No services opted.";
+        }
+
+        StringBuilder result = new StringBuilder();
+        result.append("Vehicle ID: ").append(vehicleID).append(" | ")
+              .append(make).append(" ").append(model)
+              .append(" (").append(year).append(") - Services: ");
+
+        int count = 0;
+        for (Service service : servicesOpted) {
+            result.append(service.getServiceName());
+            if (count < servicesOpted.size() - 1) {
+                result.append(", ");
+            }
+            count++;
+        }
+        return result.toString();
+    }
     
 }
