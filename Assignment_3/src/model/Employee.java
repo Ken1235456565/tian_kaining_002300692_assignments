@@ -5,17 +5,25 @@
 package model;
 
 /**
- *
- * @author tiankaining
+ * author tiankaining
  */
-public class Employee {
+public class Employee extends User {
     private String employeeID;  // Unique identifier for the employee
     private int experience;     // Years of experience
 
     // Constructor to initialize Employee details
-    public Employee(Profile profile, String username, String password, String email, String employeeID, int experience) {
+    public Employee(Profile profile, String username, String password, String employeeID, int experience) {
+        super(profile, username, password);
         this.employeeID = employeeID;
         this.experience = experience;
     }
     
+    public String getEmployeeID() {
+        return employeeID;
+    }
+    
+    public int getExperience() {
+        return experience;
+    }
 }
+

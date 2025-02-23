@@ -3,23 +3,39 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ui;
-import model.Product;
+import java.awt.CardLayout;
 import javax.swing.*;
-
+import model.APP;
+import ui.page.F1_S1_AdminLoginScreen;
+import ui.page.F3_S1_CustLoginScreen;
+import ui.page.F2_S1_BranchLoginScreen;
 
 /**
  *
  * @author tiankaining
  */
 public class MainJFrame extends javax.swing.JFrame {
-    Product product;
 
+    private APP app;
+    
+    
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame() {
         initComponents();
-        product = new Product();
+        
+        // 强制设置 rightPanel 使用 CardLayout
+    rightPanel.setLayout(new CardLayout());
+        
+        // Initialize the application
+        app = new APP();
+        app.configureBusiness();
+        
+        // Set up the right panel
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        rightPanel.add("WelcomePanel", new JPanel()); // Default panel
+        layout.next(rightPanel);
     }
 
     /**
@@ -33,31 +49,31 @@ public class MainJFrame extends javax.swing.JFrame {
 
         splitPane = new javax.swing.JSplitPane();
         leftPanel = new javax.swing.JPanel();
-        btnCreate = new javax.swing.JButton();
-        btnView = new javax.swing.JButton();
-        btnView1 = new javax.swing.JButton();
+        btnAdmin = new javax.swing.JButton();
+        btnBranchM = new javax.swing.JButton();
+        btnCust = new javax.swing.JButton();
         rightPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnCreate.setText("Administrator");
-        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+        btnAdmin.setText("Administrator");
+        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateActionPerformed(evt);
+                btnAdminActionPerformed(evt);
             }
         });
 
-        btnView.setText("Branch Manager");
-        btnView.addActionListener(new java.awt.event.ActionListener() {
+        btnBranchM.setText("Branch Manager");
+        btnBranchM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewActionPerformed(evt);
+                btnBranchMActionPerformed(evt);
             }
         });
 
-        btnView1.setText("Custcmer");
-        btnView1.addActionListener(new java.awt.event.ActionListener() {
+        btnCust.setText("Custcmer");
+        btnCust.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnView1ActionPerformed(evt);
+                btnCustActionPerformed(evt);
             }
         });
 
@@ -67,24 +83,24 @@ public class MainJFrame extends javax.swing.JFrame {
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftPanelLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, leftPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnView1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnBranchM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCust, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         leftPanelLayout.setVerticalGroup(
             leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(leftPanelLayout.createSequentialGroup()
                 .addGap(128, 128, 128)
-                .addComponent(btnCreate)
+                .addComponent(btnAdmin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnView)
+                .addComponent(btnBranchM)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnView1)
+                .addComponent(btnCust)
                 .addContainerGap(344, Short.MAX_VALUE))
         );
 
@@ -117,63 +133,45 @@ public class MainJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        // TODO add your handling code here:
-        CreatePanel createPanel = new CreatePanel(product);
-        splitPane.setRightComponent(createPanel);
+    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
 
-    }//GEN-LAST:event_btnCreateActionPerformed
+        F1_S1_AdminLoginScreen loginScreen = new F1_S1_AdminLoginScreen(rightPanel, app.getUserDirectory());
+        rightPanel.add("AdminLoginScreen", loginScreen);
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.show(rightPanel, "AdminLoginScreen");
+    }//GEN-LAST:event_btnAdminActionPerformed
 
-    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        // TODO add your handling code here:
-        ViewPanel viewPanel = new ViewPanel(product);
-        splitPane.setRightComponent(viewPanel);
-    }//GEN-LAST:event_btnViewActionPerformed
+    private void btnBranchMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBranchMActionPerformed
 
-    private void btnView1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnView1ActionPerformed
+        F2_S1_BranchLoginScreen loginScreen = new F2_S1_BranchLoginScreen(rightPanel, app.getUserDirectory());
+        rightPanel.add("BranchLoginScreen", loginScreen);
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.show(rightPanel, "BranchLoginScreen");
+    }//GEN-LAST:event_btnBranchMActionPerformed
+
+    private void btnCustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnView1ActionPerformed
+        F3_S1_CustLoginScreen loginScreen = new F3_S1_CustLoginScreen(rightPanel, app.getUserDirectory(), app.getCustomerDirectory());
+        rightPanel.add("CustomerLoginScreen", loginScreen);
+        CardLayout layout = (CardLayout) rightPanel.getLayout();
+        layout.show(rightPanel, "CustomerLoginScreen");
+    }//GEN-LAST:event_btnCustActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new MainJFrame().setVisible(true);
         }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainJFrame().setVisible(true);
-            }
-        });
-    }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCreate;
-    private javax.swing.JButton btnView;
-    private javax.swing.JButton btnView1;
+    private javax.swing.JButton btnAdmin;
+    private javax.swing.JButton btnBranchM;
+    private javax.swing.JButton btnCust;
     private javax.swing.JPanel leftPanel;
     private javax.swing.JPanel rightPanel;
     private javax.swing.JSplitPane splitPane;

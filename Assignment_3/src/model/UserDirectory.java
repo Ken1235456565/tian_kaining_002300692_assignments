@@ -6,10 +6,8 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-/**
- *
- * @author tiankaining
- */
+
+
 public class UserDirectory {
     private List<User> users; 
 
@@ -17,4 +15,27 @@ public class UserDirectory {
     public UserDirectory() {
         this.users = new ArrayList<>();
     }
+    
+    public void addUser(User user) {
+        users.add(user);
+    }
+    
+    public List<User> getUsers() {
+        return users;
+    }
+    
+    // 修复可能存在的问题：确保正确比较用户名
+    public User findUserByUsername(String username) {
+        for (User user : users) {
+            if (user.getUsername() != null && user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
+    }
+    
+    public void removeUser(User user) {
+        users.remove(user);
+    }
 }
+

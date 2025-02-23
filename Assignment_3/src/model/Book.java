@@ -7,17 +7,19 @@ package model;
 import java.util.Date;
 
 /**
- *
  * @author tiankaining
  */
 public class Book {
-    private String serialNumber;  // Unique identifier for the book
-    private String name;          // Title of the book
-    private Date registeredDate;  // Date when the book was registered in the system
-    private boolean isAvailable;  // Availability flag (true if available, false if rented)
-    private int numberOfPages;    // Total number of pages in the book
-    private String language;      // Language of the book (e.g., English, French)
-    private Author author;        // The author of the book
+    private static int bookCounter = 0;
+    private String serialNumber;
+    private String name;
+    private Date registeredDate;
+    private boolean isAvailable;
+    private int numberOfPages;
+    private String language;
+    private Author author;
+    private Library library;
+    private double rentalPricePerDay;
 
     public Book(String serialNumber, String name, Date registeredDate, int numberOfPages, String language, Author author) {
         this.serialNumber = serialNumber;
@@ -27,6 +29,18 @@ public class Book {
         this.numberOfPages = numberOfPages;
         this.language = language;
         this.author = author;
+        this.rentalPricePerDay = 2.0; // Default rental price
+        
+        // Add this book to author's list of books
+        author.addBook(this);
+    }
+    
+    public void setAvailability(boolean available) {
+        this.isAvailable = available;
+    }
+    
+    public boolean checkAvailability() {
+        return isAvailable;
     }
 
     public String getSerialNumber() {
@@ -53,7 +67,7 @@ public class Book {
         this.registeredDate = registeredDate;
     }
 
-    public boolean isIsAvailable() {
+    public boolean isAvailable() {
         return isAvailable;
     }
 
@@ -85,6 +99,19 @@ public class Book {
         this.author = author;
     }
     
+    public Library getLibrary() {
+        return library;
+    }
+
+    public void setLibrary(Library library) {
+        this.library = library;
+    }
     
-    
+    public double getRentalPricePerDay() {
+        return rentalPricePerDay;
+    }
+
+    public void setRentalPricePerDay(double rentalPricePerDay) {
+        this.rentalPricePerDay = rentalPricePerDay;
+    }
 }
